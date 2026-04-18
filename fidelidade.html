@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Fidelidade</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <a href="index.html" class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Programa de Fidelidade</span></div>
+  </a>
+  <div class="header__actions">
+    <button class="btn-icon" onclick="irPara('carrinho.html')">
+      🛒<span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="desktop-nav">
+  <a href="index.html">Início</a>
+  <a href="cardapio.html">Cardápio</a>
+  <a href="fidelidade.html" class="active">Fidelidade</a>
+  <a href="acompanhamento.html">Meu Pedido</a>
+  <a href="login.html">Entrar</a>
+</nav>
+
+<main class="container">
+
+  <!-- AVISO LGPD -->
+  <div class="lgpd-banner mt-16">
+    <div class="lgpd-banner__icon">🔒</div>
+    <div class="lgpd-banner__text">
+      <span class="lgpd-banner__title">Programa de Fidelidade e LGPD</span>
+      A participação no programa é opcional. Seus dados (histórico de compras e pontos)
+      são utilizados exclusivamente para calcular recompensas. Você pode solicitar
+      exclusão dos dados a qualquer momento via
+      <a href="mailto:privacidade@raizesnordeste.com.br">privacidade@raizesnordeste.com.br</a>.
+    </div>
+  </div>
+
+  <!-- CARD DE PONTOS -->
+  <div id="card-pontos-usuario" class="points-card">
+    <div class="points-card__num" id="total-pontos">--</div>
+    <div class="points-card__label">⭐ Seus Pontos</div>
+    <div class="points-card__sub" id="sub-pontos">Faça login para ver seus pontos</div>
+  </div>
+
+  <!-- COMO FUNCIONA -->
+  <div class="card mb-16">
+    <div class="section-title">📖 Como Funciona</div>
+    <div style="font-size:.88rem;line-height:1.8;color:var(--c-muted);">
+      <div>🛒 <strong>Acumule:</strong> R$ 1,00 gasto = 1 ponto</div>
+      <div>⭐ <strong>Boas-vindas:</strong> Ganhe 100 pontos ao criar sua conta</div>
+      <div>🎉 <strong>Final de semana:</strong> Compras acima de R$ 30 = pontos em dobro</div>
+      <div>🏷️ <strong>Resgate:</strong> 50 pontos = R$ 5,00 de desconto</div>
+      <div>📅 <strong>Validade:</strong> Pontos expiram após 12 meses sem uso</div>
+    </div>
+  </div>
+
+  <!-- PROMOÇÕES ATIVAS -->
+  <div class="section-title">🎉 Promoções Ativas</div>
+  <div id="lista-promocoes"></div>
+
+  <!-- RECOMPENSAS DISPONÍVEIS -->
+  <div class="section-title mt-16">🎁 Recompensas Disponíveis</div>
+  <div id="lista-recompensas"></div>
+
+  <!-- HISTÓRICO (mockado) -->
+  <div class="section-title mt-16">📋 Histórico de Pontos</div>
+  <div class="card">
+    <div id="historico-pontos"></div>
+    <div id="sem-historico" class="text-muted text-center" style="padding:12px 0;">
+      Nenhum histórico disponível. Faça seu primeiro pedido!
+    </div>
+  </div>
+
+  <!-- CADASTRO FIDELIDADE (para não-cadastrados) -->
+  <div id="card-cadastro-fidelidade" class="card mt-16 hidden text-center">
+    <div style="font-size:2.5rem;">⭐</div>
+    <div class="page-title mt-8 mb-8">Comece a acumular pontos!</div>
+    <div class="text-muted mb-16">Crie sua conta gratuitamente e ganhe 100 pontos de boas-vindas.</div>
+    <a href="login.html" class="btn btn-primary btn-inline">Criar Conta Grátis →</a>
+  </div>
+
+  <a href="cardapio.html" class="btn btn-secondary mt-16">🍽️ Fazer Pedido e Acumular Pontos</a>
+
+</main>
+
+<!-- MODAL: RESGATAR -->
+<div class="modal-overlay hidden" id="modal-resgatar" onclick="fecharModalResgatar()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>🎁 Resgatar Recompensa</h3>
+    <p id="msg-resgatar"></p>
+    <div class="lgpd-banner">
+      <div class="lgpd-banner__icon">🔒</div>
+      <div class="lgpd-banner__text">
+        <span class="lgpd-banner__title">Uso de Dados (LGPD)</span>
+        O resgate utiliza seus pontos acumulados. Esta ação ficará registrada em seu histórico.
+      </div>
+    </div>
+    <button class="btn btn-primary" id="btn-confirmar-resgate" onclick="confirmarResgate()">Confirmar Resgate</button>
+    <button class="btn btn-ghost mt-8" onclick="fecharModalResgatar()">Cancelar</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav__item"><span class="icon">🏠</span>Início</a>
+  <a href="cardapio.html" class="bottom-nav__item"><span class="icon">🍽️</span>Cardápio</a>
+  <a href="fidelidade.html" class="bottom-nav__item active"><span class="icon">⭐</span>Fidelidade</a>
+  <a href="acompanhamento.html" class="bottom-nav__item"><span class="icon">📦</span>Pedido</a>
+  <a href="login.html" class="bottom-nav__item"><span class="icon">👤</span>Conta</a>
+</nav>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const usuario = getUsuario();
+  let recompensaSelecionada = null;
+
+  function renderPontos() {
+    const pontos = usuario ? usuario.pontos : 0;
+    document.getElementById('total-pontos').textContent = pontos;
+
+    if (usuario && !usuario.convidado) {
+      document.getElementById('sub-pontos').textContent =
+        `Olá, ${usuario.nome.split(' ')[0]}! Próximo resgate em ${Math.max(0, 50 - (pontos % 50))} pts`;
+    } else if (usuario && usuario.convidado) {
+      document.getElementById('sub-pontos').textContent = 'Crie uma conta para acumular pontos';
+      document.getElementById('card-cadastro-fidelidade').classList.remove('hidden');
+    } else {
+      document.getElementById('sub-pontos').textContent = 'Faça login para ver seus pontos';
+      document.getElementById('card-cadastro-fidelidade').classList.remove('hidden');
+    }
+  }
+
+  function renderPromocoes() {
+    document.getElementById('lista-promocoes').innerHTML = DADOS.promocoes.map(p => `
+      <div class="promo-card">
+        <span class="promo-card__badge">${p.badge}</span>
+        <div class="promo-card__title">${p.titulo}</div>
+        <div class="promo-card__desc">${p.descricao}</div>
+        <div class="promo-card__val">📅 ${p.validade}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderRecompensas() {
+    const pontos = usuario ? usuario.pontos : 0;
+    document.getElementById('lista-recompensas').innerHTML = DADOS.recompensas.map(r => {
+      const podeResgatar = pontos >= r.pontos && usuario && !usuario.convidado;
+      return `
+        <div class="reward-item">
+          <div class="reward-item__icon">${r.emoji}</div>
+          <div class="reward-item__info">
+            <div class="reward-item__name">${r.nome}</div>
+            <div class="reward-item__pts">⭐ ${r.pontos} pontos</div>
+          </div>
+          <button class="btn btn-${podeResgatar ? 'primary' : 'ghost'} btn-sm reward-item__btn"
+            ${!podeResgatar ? 'disabled' : ''}
+            onclick="${podeResgatar ? `abrirModalResgatar(${r.id})` : ''}">
+            ${podeResgatar ? 'Resgatar' : `Faltam ${r.pontos - pontos} pts`}
+          </button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderHistorico() {
+    const pedido = getPedido();
+    const semHistorico = document.getElementById('sem-historico');
+    const histDiv = document.getElementById('historico-pontos');
+
+    if (!pedido || !usuario || usuario.convidado) return;
+
+    const pts = Math.floor(pedido.total || 0);
+    const agora = new Date();
+
+    histDiv.innerHTML = `
+      <div class="totals-row">
+        <span>🛒 Pedido #${pedido.numeroPedido || '--'} · ${agora.toLocaleDateString('pt-BR')}</span>
+        <span style="color:var(--c-success);font-weight:700;">+${pts} pts</span>
+      </div>
+      ${usuario.novo === false && usuario.pontos >= 100 ? `
+        <div class="totals-row">
+          <span>🎉 Bônus Boas-vindas</span>
+          <span style="color:var(--c-success);font-weight:700;">+100 pts</span>
+        </div>` : ''}
+    `;
+    semHistorico.classList.add('hidden');
+  }
+
+  function abrirModalResgatar(id) {
+    recompensaSelecionada = DADOS.recompensas.find(r => r.id === id);
+    document.getElementById('msg-resgatar').innerHTML =
+      `Deseja resgatar <strong>${recompensaSelecionada.emoji} ${recompensaSelecionada.nome}</strong>
+      por <strong>${recompensaSelecionada.pontos} pontos</strong>?
+      Seu saldo atual: <strong>${usuario.pontos} pontos</strong>.`;
+    document.getElementById('modal-resgatar').classList.remove('hidden');
+  }
+
+  function fecharModalResgatar() {
+    document.getElementById('modal-resgatar').classList.add('hidden');
+    recompensaSelecionada = null;
+  }
+
+  function confirmarResgate() {
+    if (!recompensaSelecionada || !usuario) return;
+    usuario.pontos -= recompensaSelecionada.pontos;
+    setUsuario(usuario);
+    fecharModalResgatar();
+    renderPontos();
+    renderRecompensas();
+    alert(`✅ ${recompensaSelecionada.nome} resgatado com sucesso! Apresente este cupom no balcão.`);
+  }
+
+  renderPontos();
+  renderPromocoes();
+  renderRecompensas();
+  renderHistorico();
+</script>
+</body>
+</html>

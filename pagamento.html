@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Processando Pagamento</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <div class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Pagamento</span></div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- TELA: PROCESSANDO -->
+  <div id="tela-processando" class="text-center" style="padding:60px 0;">
+    <div class="spinner"></div>
+    <div class="page-title mt-8">Processando pagamento...</div>
+    <div class="text-muted">Aguarde. Estamos enviando os dados ao gateway externo.</div>
+    <div class="alert alert-info mt-16" style="text-align:left;">
+      <span>🔒</span>
+      <span><strong>Conexão segura.</strong> Os dados estão sendo transmitidos via HTTPS/TLS ao serviço de pagamento externo. Nenhum dado de cartão é armazenado em nossos servidores.</span>
+    </div>
+    <!-- QR Code PIX mock (exibido quando for pix) -->
+    <div id="pix-area" class="hidden">
+      <div class="card mt-16" style="text-align:center;">
+        <div class="section-title">Escaneie o QR Code Pix</div>
+        <!-- QR simulado com CSS -->
+        <div style="display:inline-block;background:#fff;padding:16px;border:2px solid var(--c-border);border-radius:8px;margin:12px auto;">
+          <div style="display:grid;grid-template-columns:repeat(7,20px);gap:2px;">
+            <!-- Padrão visual de QR simulado -->
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#fff;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+            <div style="background:#2c1810;width:20px;height:20px;border-radius:2px;"></div>
+          </div>
+        </div>
+        <div class="text-muted" style="font-size:.8rem;">Chave Pix: raizesnordeste@pagamento.com.br</div>
+        <div class="text-muted" style="font-size:.85rem;margin-top:4px;">Valor: <strong id="valor-pix">R$ 0,00</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA: SUCESSO -->
+  <div id="tela-sucesso" class="hidden text-center" style="padding:40px 0;">
+    <div class="success-icon">✅</div>
+    <div class="page-title">Pagamento Confirmado!</div>
+    <div class="text-muted mb-16">Seu pedido foi recebido com sucesso.</div>
+
+    <div class="order-number-box">
+      <div class="order-number-box__label">Número do Pedido</div>
+      <div class="order-number-box__num" id="numero-pedido-sucesso">--</div>
+    </div>
+
+    <div class="alert alert-success mt-8" style="text-align:left;">
+      <span>⭐</span>
+      <span>Você ganhou <strong id="pontos-creditar">0 pontos</strong> de fidelidade nesta compra!</span>
+    </div>
+
+    <button class="btn btn-primary mt-12" onclick="irPara('acompanhamento.html')">
+      📦 Acompanhar Meu Pedido →
+    </button>
+  </div>
+
+  <!-- TELA: ERRO -->
+  <div id="tela-erro" class="hidden text-center" style="padding:60px 0;">
+    <div style="font-size:3.5rem;">❌</div>
+    <div class="page-title mt-12">Falha no Pagamento</div>
+    <div class="text-muted mb-16">O gateway externo recusou a transação. Nenhum valor foi cobrado.</div>
+
+    <div class="alert alert-error" style="text-align:left;">
+      <span>⚠️</span>
+      <span>Possíveis causas: saldo insuficiente, cartão expirado ou limite excedido.</span>
+    </div>
+
+    <a href="checkout.html" class="btn btn-primary mt-16">Tentar Novamente →</a>
+    <a href="carrinho.html" class="btn btn-ghost mt-8">← Voltar ao Carrinho</a>
+  </div>
+
+</main>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const pedido  = getPedido();
+  const usuario = getUsuario();
+
+  if (!pedido || !pedido.formaPagamento) irPara('checkout.html');
+
+  /* Mostrar QR Pix se pagamento for pix */
+  if (pedido.formaPagamento === 'pix') {
+    document.getElementById('pix-area').classList.remove('hidden');
+    document.getElementById('valor-pix').textContent = formatarPreco(pedido.total || 0);
+  }
+
+  /* Simular processamento (3 seg sucesso, ~10% falha) */
+  setTimeout(() => {
+    const falha = Math.random() < 0.10; /* 10% chance de falha para demonstrar fluxo de erro */
+
+    document.getElementById('tela-processando').classList.add('hidden');
+
+    if (falha) {
+      document.getElementById('tela-erro').classList.remove('hidden');
+    } else {
+      document.getElementById('tela-sucesso').classList.remove('hidden');
+      document.getElementById('numero-pedido-sucesso').textContent = pedido.numeroPedido || '--';
+
+      /* Calcular pontos ganhos */
+      const pontosGanhos = Math.floor(pedido.total || 0);
+      document.getElementById('pontos-creditar').textContent = `${pontosGanhos} pontos`;
+
+      /* Atualizar pontos do usuário */
+      if (usuario && !usuario.convidado) {
+        const pontosAntes = pedido.usarPontos
+          ? Math.max(0, usuario.pontos - Math.floor(usuario.pontos / 50) * 50)
+          : usuario.pontos;
+        usuario.pontos = pontosAntes + pontosGanhos;
+        if (usuario.novo) { usuario.pontos += 100; delete usuario.novo; } /* bônus boas-vindas */
+        setUsuario(usuario);
+      }
+
+      /* Salvar status inicial do pedido */
+      const p = getPedido();
+      p.status = 'confirmado';
+      p.statusIdx = 0;
+      setPedido(p);
+
+      /* Limpar carrinho */
+      limparCarrinho();
+    }
+  }, 3000);
+</script>
+</body>
+</html>

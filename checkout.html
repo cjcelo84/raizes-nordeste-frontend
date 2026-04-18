@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Pagamento</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <a href="carrinho.html" class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Finalizar Pedido</span></div>
+  </a>
+  <div class="header__actions">
+    <button class="btn-icon" onclick="irPara('carrinho.html')" title="Voltar ao Carrinho">🛒
+      <span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- RESUMO DO PEDIDO -->
+  <div class="page-title mt-16">📋 Resumo do Pedido</div>
+  <div class="card mb-12 mt-8" id="resumo-pedido"></div>
+
+  <!-- IDENTIFICAÇÃO DO CLIENTE -->
+  <div class="section-title">👤 Identificação</div>
+  <div class="card mb-12" id="card-identificacao"></div>
+
+  <!-- AVISO LGPD -->
+  <div class="lgpd-banner mb-12">
+    <div class="lgpd-banner__icon">🔒</div>
+    <div class="lgpd-banner__text">
+      <span class="lgpd-banner__title">Segurança no Pagamento (LGPD)</span>
+      Seus dados de pagamento são transmitidos de forma criptografada diretamente ao
+      gateway externo certificado pelo Banco Central. A Raízes do Nordeste
+      <strong>não armazena</strong> dados de cartão ou chaves Pix.
+    </div>
+  </div>
+
+  <!-- FORMA DE PAGAMENTO -->
+  <div class="section-title">💳 Forma de Pagamento</div>
+
+  <div class="payment-options" id="opcoes-pagamento">
+
+    <label class="payment-option" onclick="selecionarPag(this,'pix')">
+      <input type="radio" name="pagamento" value="pix">
+      <div class="payment-option__icon">⚡</div>
+      <div class="payment-option__info">
+        <div class="payment-option__name">Pix</div>
+        <div class="payment-option__desc">Aprovação imediata · sem taxas</div>
+      </div>
+    </label>
+
+    <label class="payment-option" onclick="selecionarPag(this,'credito')">
+      <input type="radio" name="pagamento" value="credito">
+      <div class="payment-option__icon">💳</div>
+      <div class="payment-option__info">
+        <div class="payment-option__name">Cartão de Crédito</div>
+        <div class="payment-option__desc">Até 3× sem juros</div>
+      </div>
+    </label>
+
+    <label class="payment-option" onclick="selecionarPag(this,'debito')">
+      <input type="radio" name="pagamento" value="debito">
+      <div class="payment-option__icon">💳</div>
+      <div class="payment-option__info">
+        <div class="payment-option__name">Cartão de Débito</div>
+        <div class="payment-option__desc">Débito à vista · aprovação rápida</div>
+      </div>
+    </label>
+
+    <label class="payment-option" onclick="selecionarPag(this,'dinheiro')">
+      <input type="radio" name="pagamento" value="dinheiro">
+      <div class="payment-option__icon">💵</div>
+      <div class="payment-option__info">
+        <div class="payment-option__name">Dinheiro</div>
+        <div class="payment-option__desc">Pague no balcão ao retirar</div>
+      </div>
+    </label>
+
+  </div>
+
+  <!-- CAMPO CARTÃO (aparece só para crédito/débito) -->
+  <div id="campo-cartao" class="card mb-12 hidden">
+    <div class="section-title mb-8">Dados do Cartão</div>
+    <div class="alert alert-info mb-8">
+      <span>🔒</span>
+      <span>Os dados são enviados diretamente ao gateway externo via HTTPS/TLS.
+      Não ficam armazenados em nossos servidores.</span>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Número do Cartão</label>
+      <input type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19" id="num-cartao" oninput="mascaraCartao(this)">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="form-group">
+        <label class="form-label">Validade</label>
+        <input type="text" class="form-control" placeholder="MM/AA" maxlength="5">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CVV</label>
+        <input type="text" class="form-control" placeholder="123" maxlength="3">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nome no Cartão</label>
+      <input type="text" class="form-control" placeholder="COMO ESTÁ NO CARTÃO">
+    </div>
+  </div>
+
+  <!-- CAMPO PIX (aparece só para pix) -->
+  <div id="campo-pix" class="hidden">
+    <div class="alert alert-info">
+      <span>⚡</span>
+      <span>Após confirmar, exibiremos o QR Code Pix gerado pelo gateway externo para você escanear.</span>
+    </div>
+  </div>
+
+  <!-- CONFIRMAÇÃO LGPD FINAL -->
+  <div class="card mb-16">
+    <div class="form-check">
+      <input type="checkbox" id="confirm-lgpd" required>
+      <label for="confirm-lgpd">
+        Confirmo que li e aceito os <a href="#" onclick="abrirModalTermos()">Termos de Uso</a>
+        e autorizo o envio dos dados desta transação ao serviço de pagamento externo,
+        conforme nossa <a href="#" onclick="abrirModalPriv()">Política de Privacidade</a> (LGPD).
+      </label>
+    </div>
+    <div class="form-error" id="err-lgpd-checkout">Confirmação obrigatória</div>
+  </div>
+
+  <div id="err-pagamento" class="alert alert-error hidden">
+    <span>❌</span><span>Selecione uma forma de pagamento e confirme os termos.</span>
+  </div>
+
+  <button class="btn btn-primary" onclick="confirmarPedido()">
+    🔒 Confirmar e Pagar
+  </button>
+
+  <a href="carrinho.html" class="btn btn-ghost mt-8">← Voltar ao Carrinho</a>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav__item"><span class="icon">🏠</span>Início</a>
+  <a href="cardapio.html" class="bottom-nav__item"><span class="icon">🍽️</span>Cardápio</a>
+  <a href="fidelidade.html" class="bottom-nav__item"><span class="icon">⭐</span>Fidelidade</a>
+  <a href="acompanhamento.html" class="bottom-nav__item"><span class="icon">📦</span>Pedido</a>
+  <a href="login.html" class="bottom-nav__item"><span class="icon">👤</span>Conta</a>
+</nav>
+
+<!-- MODAIS -->
+<div class="modal-overlay hidden" id="modal-termos-chk" onclick="fecharModal('modal-termos-chk')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>📄 Termos de Uso</h3>
+    <p>Ao confirmar o pedido, você concorda com as condições de compra e pagamento da Rede Raízes do Nordeste. Pedidos cancelados têm reembolso em até 5 dias úteis.</p>
+    <button class="btn btn-primary" onclick="fecharModal('modal-termos-chk')">Entendido ✓</button>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="modal-priv-chk" onclick="fecharModal('modal-priv-chk')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>🔒 Privacidade no Pagamento</h3>
+    <p>Os dados de pagamento são transmitidos via HTTPS ao gateway certificado. Não armazenamos dados de cartão. Dados pessoais são tratados conforme a LGPD (Lei 13.709/2018).</p>
+    <button class="btn btn-primary" onclick="fecharModal('modal-priv-chk')">Entendido ✓</button>
+  </div>
+</div>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const pedido = getPedido();
+  const usuario = getUsuario();
+  let formaPagamento = '';
+
+  if (!pedido || !pedido.itens || pedido.itens.length === 0) {
+    irPara('carrinho.html');
+  }
+
+  function renderResumo() {
+    const div = document.getElementById('resumo-pedido');
+    div.innerHTML = `
+      ${pedido.itens.map(i => `
+        <div class="totals-row">
+          <span>${i.emoji} ${i.nome} × ${i.qtd}</span>
+          <span>${formatarPreco(i.preco * i.qtd)}</span>
+        </div>
+      `).join('')}
+      <div class="totals-row">
+        <span>Subtotal</span><span>${formatarPreco(pedido.subtotal)}</span>
+      </div>
+      ${pedido.desconto > 0 ? `
+        <div class="totals-row"><span>Desconto (pontos)</span>
+        <span style="color:var(--c-success);">–${formatarPreco(pedido.desconto)}</span></div>
+      ` : ''}
+      <div class="totals-row total-final">
+        <span>Total</span><span>${formatarPreco(pedido.total)}</span>
+      </div>
+    `;
+  }
+
+  function renderIdentificacao() {
+    const div = document.getElementById('card-identificacao');
+    if (usuario && !usuario.convidado) {
+      div.innerHTML = `
+        <div class="flex-between">
+          <div>
+            <div style="font-weight:700;">${usuario.nome}</div>
+            <div class="text-muted">${usuario.email || ''}</div>
+          </div>
+          <div style="color:var(--c-success);font-size:1.2rem;">✅</div>
+        </div>
+        <div class="text-muted mt-8" style="font-size:.8rem;">⭐ Pontos serão creditados após confirmação do pagamento</div>
+      `;
+    } else {
+      div.innerHTML = `
+        <div class="text-muted">Você está pedindo como convidado.</div>
+        <a href="login.html" class="btn btn-secondary btn-sm mt-8 btn-inline">Entrar / Criar conta</a>
+      `;
+    }
+  }
+
+  function selecionarPag(el, forma) {
+    document.querySelectorAll('.payment-option').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    formaPagamento = forma;
+    document.getElementById('campo-cartao').classList.toggle('hidden', !['credito','debito'].includes(forma));
+    document.getElementById('campo-pix').classList.toggle('hidden', forma !== 'pix');
+  }
+
+  function mascaraCartao(input) {
+    let v = input.value.replace(/\D/g,'').substring(0,16);
+    v = v.replace(/(.{4})/g,'$1 ').trim();
+    input.value = v;
+  }
+
+  function abrirModalTermos() { document.getElementById('modal-termos-chk').classList.remove('hidden'); }
+  function abrirModalPriv()   { document.getElementById('modal-priv-chk').classList.remove('hidden'); }
+  function fecharModal(id)    { document.getElementById(id).classList.add('hidden'); }
+
+  function confirmarPedido() {
+    const lgpdOk = document.getElementById('confirm-lgpd').checked;
+
+    if (!formaPagamento) {
+      document.getElementById('err-pagamento').classList.remove('hidden'); return;
+    }
+    if (!lgpdOk) {
+      document.getElementById('err-lgpd-checkout').classList.add('show');
+      document.getElementById('err-pagamento').classList.remove('hidden'); return;
+    }
+
+    document.getElementById('err-pagamento').classList.add('hidden');
+    document.getElementById('err-lgpd-checkout').classList.remove('show');
+
+    /* Salvar forma de pagamento no pedido */
+    const p = getPedido();
+    p.formaPagamento = formaPagamento;
+    p.numeroPedido   = gerarNumeroPedido();
+    p.timestamp      = new Date().toISOString();
+    setPedido(p);
+
+    irPara('pagamento.html');
+  }
+
+  renderResumo();
+  renderIdentificacao();
+</script>
+</body>
+</html>

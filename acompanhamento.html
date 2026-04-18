@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Acompanhamento</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <a href="index.html" class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Meu Pedido</span></div>
+  </a>
+  <div class="header__actions">
+    <button class="btn-icon" onclick="irPara('carrinho.html')">
+      🛒<span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="desktop-nav">
+  <a href="index.html">Início</a>
+  <a href="cardapio.html">Cardápio</a>
+  <a href="fidelidade.html">Fidelidade</a>
+  <a href="acompanhamento.html" class="active">Meu Pedido</a>
+  <a href="login.html">Entrar</a>
+</nav>
+
+<main class="container">
+
+  <!-- SEM PEDIDO -->
+  <div id="sem-pedido" class="hidden text-center" style="padding:60px 0;">
+    <div style="font-size:3.5rem;">📦</div>
+    <div class="page-title mt-12">Nenhum pedido ativo</div>
+    <div class="text-muted mb-16">Você não tem pedidos em andamento no momento.</div>
+    <a href="cardapio.html" class="btn btn-primary btn-inline">🍽️ Fazer um Pedido</a>
+  </div>
+
+  <!-- ACOMPANHAMENTO -->
+  <div id="conteudo-acompanhamento" class="hidden">
+
+    <!-- NÚMERO E UNIDADE -->
+    <div class="order-number-box mt-16">
+      <div class="order-number-box__label">Senha do Pedido</div>
+      <div class="order-number-box__num" id="num-pedido">--</div>
+    </div>
+
+    <div class="card mb-12">
+      <div class="flex-between mb-8">
+        <div>
+          <div style="font-weight:700;" id="nome-unidade">—</div>
+          <div class="text-muted" id="horario-pedido">—</div>
+        </div>
+        <div id="badge-status" style="background:var(--c-primary);color:#fff;padding:4px 12px;border-radius:50px;font-size:.78rem;font-weight:700;">
+          —
+        </div>
+      </div>
+
+      <!-- ITENS DO PEDIDO -->
+      <div id="itens-pedido" style="font-size:.88rem;color:var(--c-muted);"></div>
+    </div>
+
+    <!-- TIMELINE DE STATUS -->
+    <div class="section-title">📍 Status do Pedido</div>
+    <div class="card mb-12">
+      <div class="status-timeline">
+
+        <div class="status-step" id="step-confirmado">
+          <div class="status-dot">✅</div>
+          <div class="status-step__content">
+            <div class="status-step__title">Pedido Confirmado</div>
+            <div class="status-step__desc">Pagamento processado com sucesso!</div>
+          </div>
+        </div>
+
+        <div class="status-step" id="step-preparo">
+          <div class="status-dot">👨‍🍳</div>
+          <div class="status-step__content">
+            <div class="status-step__title">Em Preparo</div>
+            <div class="status-step__desc">Nossa cozinha está preparando seu pedido.</div>
+          </div>
+        </div>
+
+        <div class="status-step" id="step-pronto">
+          <div class="status-dot">🔔</div>
+          <div class="status-step__content">
+            <div class="status-step__title">Pronto para Retirada!</div>
+            <div class="status-step__desc">Dirija-se ao balcão com sua senha.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- AVISO PRONTO -->
+    <div id="aviso-pronto" class="alert alert-success hidden">
+      <span>🔔</span>
+      <span><strong>Seu pedido está pronto!</strong> Dirija-se ao balcão da <span id="unidade-pronto"></span> e apresente a senha <strong id="senha-pronto"></strong>.</span>
+    </div>
+
+    <!-- PONTOS GANHOS -->
+    <div id="card-pontos" class="card mb-12 hidden">
+      <div class="flex-between">
+        <div>
+          <div class="section-title mb-0">⭐ Pontos Conquistados</div>
+          <div class="text-muted" style="font-size:.82rem;">Creditados após confirmação do pagamento</div>
+        </div>
+        <div style="font-size:1.5rem;font-weight:800;color:var(--c-primary);" id="pts-ganhos">+0</div>
+      </div>
+    </div>
+
+    <!-- AÇÕES -->
+    <a href="cardapio.html" class="btn btn-primary">🍽️ Fazer Novo Pedido</a>
+    <button class="btn btn-ghost mt-8" onclick="limparPedido()">Limpar histórico</button>
+
+  </div>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav__item"><span class="icon">🏠</span>Início</a>
+  <a href="cardapio.html" class="bottom-nav__item"><span class="icon">🍽️</span>Cardápio</a>
+  <a href="fidelidade.html" class="bottom-nav__item"><span class="icon">⭐</span>Fidelidade</a>
+  <a href="acompanhamento.html" class="bottom-nav__item active"><span class="icon">📦</span>Pedido</a>
+  <a href="login.html" class="bottom-nav__item"><span class="icon">👤</span>Conta</a>
+</nav>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const pedido = getPedido();
+  const usuario = getUsuario();
+
+  const ETAPAS = [
+    { id: 'step-confirmado', badge: 'Confirmado', label: 'Pedido Confirmado' },
+    { id: 'step-preparo',    badge: 'Em Preparo',  label: 'Em Preparo' },
+    { id: 'step-pronto',     badge: 'Pronto! 🔔',  label: 'Pronto para Retirada' }
+  ];
+
+  let statusAtual = 0;
+  let intervaloProgresso;
+
+  function renderAcompanhamento() {
+    if (!pedido || !pedido.numeroPedido) {
+      document.getElementById('sem-pedido').classList.remove('hidden');
+      return;
+    }
+
+    document.getElementById('conteudo-acompanhamento').classList.remove('hidden');
+    document.getElementById('num-pedido').textContent = pedido.numeroPedido;
+
+    /* Unidade */
+    if (pedido.unidade) {
+      document.getElementById('nome-unidade').textContent = pedido.unidade.nome;
+    }
+
+    /* Horário */
+    const agora = new Date();
+    document.getElementById('horario-pedido').textContent =
+      `Pedido realizado às ${agora.getHours().toString().padStart(2,'0')}:${agora.getMinutes().toString().padStart(2,'0')}`;
+
+    /* Itens */
+    if (pedido.itens) {
+      document.getElementById('itens-pedido').innerHTML =
+        pedido.itens.map(i => `${i.emoji} ${i.nome} × ${i.qtd}`).join(' &nbsp;|&nbsp; ');
+    }
+
+    /* Pontos */
+    if (usuario && !usuario.convidado) {
+      const pts = Math.floor(pedido.total || 0);
+      document.getElementById('card-pontos').classList.remove('hidden');
+      document.getElementById('pts-ganhos').textContent = `+${pts}`;
+    }
+
+    statusAtual = pedido.statusIdx || 0;
+    renderStatus(statusAtual);
+    iniciarProgressoAutomatico();
+  }
+
+  function renderStatus(idx) {
+    ETAPAS.forEach((etapa, i) => {
+      const el = document.getElementById(etapa.id);
+      el.classList.remove('done', 'active');
+      if (i < idx) el.classList.add('done');
+      else if (i === idx) el.classList.add('active');
+    });
+
+    const badge = document.getElementById('badge-status');
+    badge.textContent = ETAPAS[idx].badge;
+
+    if (idx === 2) {
+      /* Pronto para retirada */
+      document.getElementById('aviso-pronto').classList.remove('hidden');
+      document.getElementById('unidade-pronto').textContent = pedido.unidade?.nome || 'Raízes do Nordeste';
+      document.getElementById('senha-pronto').textContent = pedido.numeroPedido;
+      clearInterval(intervaloProgresso);
+    }
+  }
+
+  function iniciarProgressoAutomatico() {
+    if (statusAtual >= 2) { renderStatus(2); return; }
+
+    intervaloProgresso = setInterval(() => {
+      statusAtual++;
+      renderStatus(statusAtual);
+
+      /* Salvar novo status */
+      const p = getPedido();
+      if (p) { p.statusIdx = statusAtual; setPedido(p); }
+
+      if (statusAtual >= 2) clearInterval(intervaloProgresso);
+    }, 8000); /* avança a cada 8 segundos */
+  }
+
+  function limparPedido() {
+    localStorage.removeItem('rdn_pedido');
+    window.location.reload();
+  }
+
+  renderAcompanhamento();
+</script>
+</body>
+</html>

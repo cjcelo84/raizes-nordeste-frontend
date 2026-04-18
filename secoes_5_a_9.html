@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Raízes do Nordeste – Seções 5 a 9 (ABNT)</title>
+  <style>
+    /* =============================================
+       FORMATAÇÃO ABNT – NBR 14724
+       Fonte: Times New Roman 12pt
+       Margem: sup/dir/inf 2,5cm | esq 3cm
+       Espaçamento: 1,5 entre linhas
+       Parágrafos: recuo de 1,25cm
+    ============================================= */
+    @page {
+      size: A4;
+      margin: 2.5cm 2.5cm 2.5cm 3cm;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000;
+      background: #fff;
+      max-width: 18cm;
+      margin: 0 auto;
+      padding: 2.5cm 2.5cm 2.5cm 3cm;
+    }
+
+    /* Títulos de seção (negrito, maiúsculas, 12pt) */
+    h2 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-top: 2cm;
+      margin-bottom: 0.5cm;
+      page-break-before: always;
+    }
+    h2:first-of-type { page-break-before: avoid; }
+
+    /* Subtítulos (negrito, 12pt) */
+    h3 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-top: 1cm;
+      margin-bottom: 0.4cm;
+    }
+
+    h4 {
+      font-size: 12pt;
+      font-style: italic;
+      font-weight: bold;
+      margin-top: 0.8cm;
+      margin-bottom: 0.3cm;
+    }
+
+    /* Parágrafos com recuo */
+    p {
+      text-align: justify;
+      text-indent: 1.25cm;
+      margin-bottom: 0.3cm;
+    }
+
+    /* Listas */
+    ul, ol {
+      margin-left: 2cm;
+      margin-bottom: 0.4cm;
+    }
+    li {
+      text-align: justify;
+      margin-bottom: 0.2cm;
+      font-size: 12pt;
+    }
+
+    /* Tabela de testes (ABNT) */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5cm 0 1cm 0;
+      font-size: 11pt;
+    }
+    thead { background: #d0d0d0; }
+    th, td {
+      border: 1px solid #555;
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { font-weight: bold; text-align: center; }
+    tr:nth-child(even) { background: #f5f5f5; }
+    .pos { color: #1a6e2e; font-weight: bold; }
+    .neg { color: #8b1a1a; font-weight: bold; }
+
+    /* Citação direta longa (recuo 4cm) */
+    blockquote {
+      margin: 0.4cm 0 0.4cm 4cm;
+      font-size: 11pt;
+      text-align: justify;
+    }
+
+    /* Legenda de figura */
+    .legenda {
+      font-size: 11pt;
+      text-align: center;
+      margin: 0.2cm 0 0.6cm 0;
+      font-style: italic;
+    }
+
+    /* Nota rodapé simulada */
+    .nota {
+      font-size: 10pt;
+      border-top: 1px solid #555;
+      margin-top: 1cm;
+      padding-top: 0.3cm;
+    }
+
+    /* Referência bibliográfica */
+    .ref {
+      text-align: justify;
+      margin-bottom: 0.4cm;
+      padding-left: 0;
+      font-size: 12pt;
+    }
+    .ref + .ref { margin-top: 0.3cm; }
+
+    /* Declaração de IA */
+    .decl {
+      border: 1px solid #333;
+      padding: 0.5cm;
+      margin-top: 1cm;
+      font-size: 11pt;
+    }
+    .decl h3 { margin-top: 0; font-size: 11pt; }
+
+    /* Separador de seção para impressão */
+    .quebra { page-break-before: always; }
+
+    /* Instrução de uso */
+    .instrucao {
+      background: #FFF8E1;
+      border: 2px solid #F5A623;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-family: Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.6;
+      color: #4a3000;
+    }
+    .instrucao strong { display: block; margin-bottom: 6px; font-size: 12pt; }
+
+    @media print { .instrucao { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     INSTRUÇÕES DE USO (NÃO APARECE NA IMPRESSÃO)
+============================================================ -->
+<div class="instrucao">
+  <strong>📋 Como usar este arquivo:</strong>
+  1. Abra este arquivo no <strong>Word</strong> (Arquivo → Abrir → selecione este .html)<br>
+  2. Selecione todo o conteúdo (Ctrl+A), copie (Ctrl+C)<br>
+  3. Cole no final do seu documento principal (após a página 9)<br>
+  4. Ajuste a numeração de páginas e o Sumário conforme necessário<br>
+  5. <strong>Importante:</strong> Na seção 6, substitua os links de exemplo pelo link real do seu GitHub e deploy<br>
+  <em>Dica: Para imprimir sem estas instruções, use Ctrl+P — elas não aparecem na impressão.</em>
+</div>
+
+
+<!-- ============================================================
+     SEÇÃO 5 — LGPD E PRIVACIDADE DA INTERFACE
+============================================================ -->
+<h2>5. LGPD e Privacidade da Interface</h2>
+
+<p>
+A Lei Geral de Proteção de Dados Pessoais (LGPD – Lei n.º 13.709, de 14 de agosto de
+2018) estabelece os princípios, direitos e obrigações aplicáveis ao tratamento de dados
+pessoais em território brasileiro. No contexto da plataforma "Raízes do Nordeste", a
+conformidade com a LGPD não foi tratada como uma camada adicionada ao final do
+projeto, mas como requisito estrutural que atravessa todos os fluxos de interação desde
+o primeiro acesso do usuário.
+</p>
+
+<p>
+A arquitetura de privacidade da interface foi projetada com base no princípio da
+<em>Privacy by Design</em>, garantindo que os mecanismos de consentimento, transparência e
+controle dos dados sejam explícitos e acessíveis em todos os canais (App, Totem e Web).
+</p>
+
+<h3>5.1 Dados Coletados e Finalidades</h3>
+
+<p>
+A plataforma coleta apenas os dados estritamente necessários ao cumprimento de suas
+funcionalidades, em conformidade com o princípio da minimização previsto no Art. 6.º,
+inciso III, da LGPD. O quadro abaixo detalha os dados coletados, a base legal e a
+finalidade de cada tratamento:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dado Coletado</th>
+      <th>Base Legal (LGPD)</th>
+      <th>Finalidade</th>
+      <th>Retenção</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nome completo</td>
+      <td>Art. 7.º, I – Consentimento</td>
+      <td>Identificação e personalização da conta</td>
+      <td>Enquanto a conta estiver ativa</td>
+    </tr>
+    <tr>
+      <td>E-mail</td>
+      <td>Art. 7.º, I – Consentimento / Art. 7.º, V – Execução de contrato</td>
+      <td>Autenticação e comunicação transacional</td>
+      <td>Enquanto a conta estiver ativa</td>
+    </tr>
+    <tr>
+      <td>CPF</td>
+      <td>Art. 7.º, V – Execução de contrato</td>
+      <td>Identificação fiscal e unicidade de cadastro</td>
+      <td>5 anos (obrigação legal)</td>
+    </tr>
+    <tr>
+      <td>Telefone / WhatsApp</td>
+      <td>Art. 7.º, I – Consentimento</td>
+      <td>Comunicação de promoções (com opt-in)</td>
+      <td>Enquanto o consentimento estiver ativo</td>
+    </tr>
+    <tr>
+      <td>Histórico de pedidos</td>
+      <td>Art. 7.º, V – Execução de contrato</td>
+      <td>Programa de fidelidade e suporte ao cliente</td>
+      <td>12 meses</td>
+    </tr>
+    <tr>
+      <td>Dados de navegação</td>
+      <td>Art. 7.º, II – Legítimo interesse</td>
+      <td>Melhoria da experiência e performance da interface</td>
+      <td>90 dias (anonimizado)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 Implementação na Interface</h3>
+
+<p>
+A conformidade com a LGPD foi materializada em cinco pontos-chave da interface, descritos
+a seguir:
+</p>
+
+<h4>5.2.1 Modal de Consentimento no Primeiro Acesso</h4>
+
+<p>
+Ao acessar a plataforma pela primeira vez, o usuário é apresentado a um aviso informativo
+que descreve, em linguagem simples, os tipos de dados coletados e suas finalidades. A
+continuidade da navegação só é permitida após a leitura e o aceite explícito por meio de
+um botão de confirmação. Esta abordagem atende ao Art. 8.º da LGPD, que exige que o
+consentimento seja "fornecido por escrito ou por outro meio que demonstre a manifestação
+de vontade do titular".
+</p>
+
+<h4>5.2.2 Checkboxes de Consentimento Desvinculados</h4>
+
+<p>
+Na tela de cadastro, os consentimentos foram separados em dois campos distintos e
+independentes:
+</p>
+<ul>
+  <li><strong>Consentimento obrigatório (opt-in):</strong> aceite dos Termos de Uso e da Política de
+  Privacidade para criação da conta e realização de pedidos. Sem este aceite, não é
+  possível prosseguir.</li>
+  <li><strong>Consentimento opcional (opt-in):</strong> autorização para receber comunicações
+  promocionais por e-mail e WhatsApp, vinculada ao Programa de Fidelidade. O usuário
+  pode recusar sem impacto no pedido.</li>
+</ul>
+<p>
+Essa separação obedece ao § 5.º do Art. 7.º da LGPD, que veda a vinculação de
+consentimentos para finalidades diferentes, evitando a prática de "consent bundling".
+</p>
+
+<h4>5.2.3 Modo Convidado com Dados Mínimos</h4>
+
+<p>
+O sistema oferece a opção de pedido sem cadastro ("Continuar como Convidado"). Neste
+modo, o usuário concede consentimento simplificado apenas para o processamento da
+transação vigente, sem que qualquer dado pessoal seja armazenado após a conclusão
+do pedido. Esta funcionalidade aplica o princípio da necessidade (Art. 6.º, III) ao
+cenário de menor vínculo possível entre o sistema e o titular dos dados.
+</p>
+
+<h4>5.2.4 Transparência no Fluxo de Pagamento</h4>
+
+<p>
+Na tela de checkout, um aviso destacado informa explicitamente que os dados de
+pagamento são transmitidos de forma criptografada diretamente ao gateway externo,
+certificado pelo Banco Central, e que a plataforma "Raízes do Nordeste" não armazena
+dados de cartão ou chaves Pix. Esta comunicação proativa reduz a percepção de risco
+pelo usuário e cumpre o princípio da transparência (Art. 6.º, VI).
+</p>
+
+<h4>5.2.5 Canal de Atendimento para Direitos do Titular</h4>
+
+<p>
+A Política de Privacidade, acessível por links em todas as telas de cadastro e checkout,
+descreve os direitos do titular previstos no Art. 18.º da LGPD — acesso, correção,
+portabilidade, anonimização e exclusão dos dados — e disponibiliza o canal de
+atendimento <strong>privacidade@raizesnordeste.com.br</strong> para solicitações. Na tela de fidelidade,
+é reforçado que o histórico de pontos pode ser excluído mediante solicitação, sem
+impacto na conta corrente do usuário.
+</p>
+
+<h3>5.3 Dados de Terceiros: Gateway de Pagamento</h3>
+
+<p>
+O sistema de pagamento externo atua como operador de dados na relação prevista pelo
+Art. 5.º, VII, da LGPD. A plataforma, na posição de controladora, garante que o
+contrato com o gateway externo inclua cláusulas de proteção de dados compatíveis com
+a LGPD (DPA – Data Processing Agreement), e que o usuário seja informado desta
+transferência antes de confirmar o pagamento.
+</p>
+
+
+<!-- ============================================================
+     SEÇÃO 6 — ENTREGA TÉCNICA
+============================================================ -->
+<h2 class="quebra">6. Entrega Técnica</h2>
+
+<p>
+A entrega técnica adotou a <strong>Opção B – Codificação</strong>, conforme definido no
+roteiro da atividade. O sistema foi desenvolvido inteiramente com tecnologias web
+nativas — HTML5, CSS3 e JavaScript puro (ES6+) — sem dependência de frameworks
+externos, garantindo leveza, portabilidade e facilidade de publicação em serviços de
+hospedagem estática.
+</p>
+
+<h3>6.1 Tecnologias Utilizadas</h3>
+
+<ul>
+  <li><strong>HTML5:</strong> estruturação semântica de todas as páginas, uso de elementos como
+  <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code> e
+  <code>&lt;section&gt;</code> para acessibilidade e SEO.</li>
+  <li><strong>CSS3:</strong> estilização com Custom Properties (variáveis CSS), Flexbox e CSS Grid
+  para layout responsivo. Abordagem Mobile-first com breakpoints em 768px (tablet/desktop).</li>
+  <li><strong>JavaScript ES6+:</strong> lógica de negócio no lado do cliente, gerenciamento de
+  estado via <code>localStorage</code>, simulação de integrações externas (gateway de
+  pagamento) e renderização dinâmica do cardápio e dos fluxos de status.</li>
+  <li><strong>Mock Data:</strong> arquivo <code>js/dados.js</code> simula a base de dados com
+  16 produtos, 3 unidades, promoções e recompensas — substituindo chamadas a APIs reais.</li>
+</ul>
+
+<h3>6.2 Estrutura do Projeto</h3>
+
+<p>A arquitetura de arquivos foi organizada da seguinte forma:</p>
+
+<table>
+  <thead>
+    <tr><th>Arquivo / Pasta</th><th>Função</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>index.html</code></td><td>Página inicial — seleção de unidade e canal (App / Totem / Web)</td></tr>
+    <tr><td><code>login.html</code></td><td>Autenticação, cadastro com consentimento LGPD e modo convidado</td></tr>
+    <tr><td><code>cardapio.html</code></td><td>Cardápio dinâmico por unidade com filtros por categoria e busca</td></tr>
+    <tr><td><code>carrinho.html</code></td><td>Revisão de itens, ajuste de quantidades e uso de pontos de fidelidade</td></tr>
+    <tr><td><code>checkout.html</code></td><td>Seleção do método de pagamento e confirmação final com LGPD</td></tr>
+    <tr><td><code>pagamento.html</code></td><td>Simulação do processamento pelo gateway externo (Pix / Cartão)</td></tr>
+    <tr><td><code>acompanhamento.html</code></td><td>Painel de status do pedido com progressão automática em tempo real</td></tr>
+    <tr><td><code>fidelidade.html</code></td><td>Saldo de pontos, promoções ativas, resgate de recompensas</td></tr>
+    <tr><td><code>css/style.css</code></td><td>Estilo global Mobile-first com paleta de cores e modo totem</td></tr>
+    <tr><td><code>js/dados.js</code></td><td>Mock Data — base de dados simulada (cardápio, unidades, promoções)</td></tr>
+    <tr><td><code>js/app.js</code></td><td>Utilitários compartilhados — carrinho, sessão, navegação, formatação</td></tr>
+  </tbody>
+</table>
+
+<h3>6.3 Suporte a Múltiplos Canais</h3>
+
+<p>
+A interface suporta os três canais de atendimento exigidos por meio de um parâmetro de URL
+(<code>?modo=web</code>, <code>?modo=app</code> ou <code>?modo=totem</code>). Quando o
+modo <em>totem</em> é ativado, o CSS aplica automaticamente uma classe global que aumenta
+os alvos de toque, remove a navegação inferior e exibe uma barra de identificação "TOTEM DE
+AUTOATENDIMENTO" — simulando o comportamento esperado de um dispositivo de autoatendimento em
+loja física sem a necessidade de uma aplicação separada.
+</p>
+
+<h3>6.4 Links de Acesso</h3>
+
+<p>
+Em conformidade com os requisitos da entrega técnica, os links públicos para avaliação
+são disponibilizados a seguir:
+</p>
+
+<ul>
+  <li><strong>Repositório GitHub:</strong>
+  <code>https://github.com/[SEU_USUARIO]/raizes-nordeste-frontend</code></li>
+  <li><strong>Aplicação publicada (GitHub Pages):</strong>
+  <code>https://[SEU_USUARIO].github.io/raizes-nordeste-frontend/</code></li>
+</ul>
+
+<p>
+<em>Nota: Os links acima devem ser substituídos pelos links reais após a publicação no
+repositório GitHub e ativação do GitHub Pages (Configurações → Pages → Branch: main → /root).</em>
+</p>
+
+<h3>6.5 Como Executar Localmente</h3>
+
+<p>
+Por utilizar apenas tecnologias nativas sem dependências externas, a execução local
+não requer instalação de ferramentas adicionais. Basta abrir o arquivo
+<code>index.html</code> diretamente no navegador, ou utilizar uma extensão de servidor
+local como o <em>Live Server</em> do VS Code para simular o ambiente de hospedagem.
+</p>
+
+
+<!-- ============================================================
+     SEÇÃO 7 — PLANO DE TESTES
+============================================================ -->
+<h2 class="quebra">7. Plano de Testes</h2>
+
+<p>
+O plano de testes descreve a estratégia adotada para validar a qualidade funcional,
+a responsividade e a conformidade com a LGPD da interface desenvolvida. Os testes
+foram organizados em cenários que cobrem os fluxos principais (positivos) e as situações
+de exceção e validação (negativos), abrangendo os requisitos funcionais RF01 a RF07.
+</p>
+
+<h3>7.1 Estratégia de Testes</h3>
+
+<ul>
+  <li><strong>Testes de Usabilidade:</strong> verificação do fluxo de navegação do usuário
+  desde o acesso inicial até a retirada do pedido, avaliando clareza das informações
+  e facilidade de interação.</li>
+  <li><strong>Testes de Responsividade:</strong> validação do comportamento da interface em
+  telas mobile (360px), tablet (768px), desktop (1280px) e modo totem (parâmetro
+  <code>?modo=totem</code>).</li>
+  <li><strong>Testes de Conformidade LGPD:</strong> verificação da presença e funcionamento dos
+  mecanismos de consentimento, avisos de privacidade e restrições de acesso a dados.</li>
+  <li><strong>Testes Funcionais:</strong> validação dos fluxos de negócio — cadastro, cardápio,
+  carrinho, pagamento simulado, acompanhamento e fidelidade.</li>
+</ul>
+
+<h3>7.2 Cenários de Teste</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Caso de Teste</th>
+      <th>Pré-condição</th>
+      <th>Entrada / Ação</th>
+      <th>Resultado Esperado</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td><strong>CT01</strong></td>
+      <td>Login com credenciais válidas</td>
+      <td>Usuário não autenticado na tela de login</td>
+      <td>Informar e-mail válido (ex.: joao@email.com) e senha com 6+ caracteres. Clicar em "Entrar".</td>
+      <td>Sistema autentica o usuário, salva sessão no localStorage e redireciona para o cardápio.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT02</strong></td>
+      <td>Login com senha inválida (campo vazio)</td>
+      <td>Usuário na tela de login</td>
+      <td>Informar e-mail válido e deixar o campo de senha vazio. Clicar em "Entrar".</td>
+      <td>Sistema exibe mensagem de erro "Senha obrigatória" abaixo do campo e bloqueia o acesso.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT03</strong></td>
+      <td>Cadastro sem aceitar os Termos de Uso (LGPD)</td>
+      <td>Usuário na aba "Criar Conta"</td>
+      <td>Preencher todos os campos obrigatórios corretamente, mas não marcar o checkbox de aceite dos Termos de Uso. Clicar em "Criar Conta".</td>
+      <td>Sistema exibe alerta "Aceite obrigatório para prosseguir" e impede a criação da conta.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT04</strong></td>
+      <td>Cadastro completo com consentimento LGPD</td>
+      <td>Usuário na aba "Criar Conta"</td>
+      <td>Preencher todos os campos obrigatórios (nome, e-mail, telefone, CPF, senha) e marcar o checkbox de Termos de Uso. Clicar em "Criar Conta".</td>
+      <td>Sistema cria a conta, credita 100 pontos de boas-vindas, marca o consentimento LGPD e redireciona para o cardápio.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT05</strong></td>
+      <td>Adicionar e remover item do carrinho</td>
+      <td>Usuário autenticado na tela de cardápio</td>
+      <td>Clicar em "+ Adicionar" em qualquer item disponível. Em seguida, decrementar a quantidade até zero.</td>
+      <td>Item é adicionado ao carrinho com badge de quantidade atualizado. Ao decrementar para zero, o item é removido e o botão "+ Adicionar" retorna ao estado inicial.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT06</strong></td>
+      <td>Tentativa de adicionar item indisponível</td>
+      <td>Usuário na tela de cardápio</td>
+      <td>Verificar o item "Tapioca de Calabresa" (marcado como indisponível).</td>
+      <td>O botão de adicionar aparece desabilitado e o card exibe o aviso "Indisponível". Nenhuma interação é permitida.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT07</strong></td>
+      <td>Finalizar checkout sem selecionar forma de pagamento</td>
+      <td>Usuário com itens no carrinho na tela de checkout</td>
+      <td>Marcar o checkbox de confirmação de LGPD mas não selecionar nenhuma forma de pagamento. Clicar em "Confirmar e Pagar".</td>
+      <td>Sistema exibe alerta "Selecione uma forma de pagamento e confirme os termos" e bloqueia o envio.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT08</strong></td>
+      <td>Fluxo completo de pedido via Pix</td>
+      <td>Usuário autenticado com itens no carrinho</td>
+      <td>Selecionar pagamento via Pix, confirmar LGPD e clicar em "Confirmar e Pagar". Aguardar 3 segundos de processamento.</td>
+      <td>Tela de processamento exibe QR Code Pix simulado. Após 3 segundos, exibe confirmação com número do pedido e pontos creditados. Carrinho é limpo.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT09</strong></td>
+      <td>Acompanhamento de status do pedido em tempo real</td>
+      <td>Pedido confirmado e salvo no localStorage</td>
+      <td>Navegar para a tela de Acompanhamento imediatamente após a confirmação do pagamento.</td>
+      <td>Exibe número do pedido, status "Pedido Confirmado" ativo. Após ~8 segundos avança para "Em Preparo". Após mais ~8 segundos avança para "Pronto para Retirada" com aviso sonoro visual.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT10</strong></td>
+      <td>Acesso como Convidado com consentimento simplificado (LGPD)</td>
+      <td>Usuário não cadastrado na tela de login</td>
+      <td>Clicar na aba "Convidado", marcar o checkbox de consentimento simplificado e clicar em "Continuar sem Cadastro".</td>
+      <td>Sistema cria sessão de convidado sem armazenar dados pessoais. Redireciona para o cardápio. Tela de fidelidade exibe aviso de que pontos não são acumulados no modo convidado.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT11</strong></td>
+      <td>Acesso à tela de checkout com carrinho vazio</td>
+      <td>Usuário autenticado com carrinho vazio</td>
+      <td>Tentar acessar diretamente o arquivo checkout.html sem itens no carrinho.</td>
+      <td>Sistema detecta pedido inválido via localStorage e redireciona automaticamente para a tela do carrinho, que exibe o estado vazio com botão de retorno ao cardápio.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT12</strong></td>
+      <td>Resgate de recompensa com pontos insuficientes</td>
+      <td>Usuário autenticado com saldo de pontos inferior ao requerido pelo resgate</td>
+      <td>Na tela de Fidelidade, verificar um item de recompensa cujo custo em pontos supere o saldo do usuário (ex.: "Tapioca Grátis" = 150 pts com saldo de 80 pts).</td>
+      <td>O botão de resgate aparece desabilitado com o texto "Faltam 70 pts". O sistema não permite a abertura do modal de resgate.</td>
+      <td class="neg">Negativo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT13</strong></td>
+      <td>Validação de responsividade — Mobile (360px)</td>
+      <td>Qualquer tela da aplicação aberta em viewport de 360px de largura</td>
+      <td>Redimensionar o navegador para 360px de largura (ou usar DevTools > Device Toolbar > modo mobile).</td>
+      <td>A navegação inferior (bottom nav) é exibida. Os cards de produto, formulários e botões se ajustam à largura sem overflow horizontal. Todos os elementos são clicáveis com toque.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+    <tr>
+      <td><strong>CT14</strong></td>
+      <td>Ativação do Modo Totem</td>
+      <td>Aplicação acessível via navegador</td>
+      <td>Adicionar o parâmetro <code>?modo=totem</code> à URL de qualquer página (ex.: <code>index.html?modo=totem</code>).</td>
+      <td>Barra superior "TOTEM DE AUTOATENDIMENTO" é exibida. Botões ficam maiores (min-height 56px). A navegação inferior desaparece. Campos de formulário aumentam para facilitar o toque em tela grande.</td>
+      <td class="pos">Positivo</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<h3>7.3 Resultados Esperados Gerais</h3>
+
+<p>
+Todos os cenários positivos devem ser executados sem erros de JavaScript no console do
+navegador. Os cenários negativos devem exibir mensagens de erro claras e acessíveis,
+sem travar a aplicação. A navegação entre todas as telas deve ser fluida em Chrome,
+Firefox e Edge (versões atuais), tanto em desktop quanto em dispositivos móveis.
+</p>
+
+
+<!-- ============================================================
+     SEÇÃO 8 — CONCLUSÃO
+============================================================ -->
+<h2 class="quebra">8. Conclusão</h2>
+
+<p>
+O desenvolvimento da solução de front-end para a Rede "Raízes do Nordeste" permitiu
+integrar, de forma coesa, os fundamentos de Análise e Desenvolvimento de Sistemas às
+práticas contemporâneas de experiência do usuário (UX) e conformidade regulatória.
+O projeto partiu de um levantamento rigoroso de requisitos funcionais e não funcionais,
+consolidou-se em uma arquitetura de informação clara — representada pelos diagramas de
+casos de uso e pela jornada do usuário — e culminou em uma entrega técnica funcional
+e navegável.
+</p>
+
+<p>
+A decisão de utilizar HTML5, CSS3 e JavaScript puro, sem frameworks de terceiros, foi
+deliberada e fundamentada em três justificativas técnicas: primeiro, a portabilidade
+máxima para publicação em qualquer serviço de hospedagem estática; segundo, a eliminação
+de dependências externas que poderiam tornar a aplicação vulnerável a atualizações de
+terceiros; e terceiro, a demonstração de domínio dos fundamentos da linguagem, em vez
+do domínio de uma biblioteca específica.
+</p>
+
+<p>
+A abordagem Mobile-first, além de atender ao requisito não funcional RNF01, refletiu
+a realidade do mercado: segundo o relatório <em>Digital 2024</em> da We Are Social, mais
+de 60% do tráfego web global origina-se de dispositivos móveis (WE ARE SOCIAL; MELTWATER,
+2024). O suporte nativo a três canais distintos — App, Totem e Web — por meio de um único
+codebase parametrizado (<code>?modo=</code>) demonstra escalabilidade de design e reduz
+o custo de manutenção da plataforma.
+</p>
+
+<p>
+A integração com o back-end, embora simulada nesta entrega por meio de dados mockados,
+foi projetada de forma a facilitar a transição para uma API RESTful real. O
+<code>js/dados.js</code> pode ser substituído por chamadas <code>fetch()</code> a
+endpoints do servidor sem qualquer alteração nas camadas de apresentação ou de lógica
+de negócio do front-end. Da mesma forma, o fluxo de pagamento externo foi desenhado
+para encapsular a comunicação com o gateway, expondo ao usuário apenas os estados
+visuais (processando, sucesso, erro) — padrão que qualquer serviço real de pagamento
+(Stripe, PagSeguro, Mercado Pago) recomenda para conformidade com PCI-DSS.
+</p>
+
+<p>
+Do ponto de vista da qualidade (QA), o plano de testes apresentado na Seção 7 cobriu
+14 cenários que abrangem desde a validação de campos de formulário até a verificação
+de responsividade e do modo totem. A inclusão de cenários negativos — como a tentativa
+de checkout sem forma de pagamento selecionada ou o acesso direto a telas protegidas —
+demonstra maturidade no raciocínio sobre estados de falha, aspecto frequentemente
+negligenciado em projetos acadêmicos e valioso em contextos de mercado.
+</p>
+
+<p>
+Por fim, a conformidade com a LGPD, tratada como pilar do projeto desde sua concepção,
+resultou em uma interface que respeita a autonomia do usuário sem comprometer a
+usabilidade. O uso de consentimentos desvinculados, a opção de modo convidado e a
+transparência sobre o destino dos dados de pagamento são soluções que, além de atender
+à lei, constroem confiança — ativo intangível essencial para a retenção de clientes em
+negócios de alimentação com múltiplas unidades.
+</p>
+
+
+<!-- ============================================================
+     SEÇÃO 9 — REFERÊNCIAS BIBLIOGRÁFICAS
+============================================================ -->
+<h2 class="quebra">9. Referências Bibliográficas</h2>
+
+<p class="ref">
+BRASIL. <strong>Lei n.º 13.709, de 14 de agosto de 2018.</strong> Lei Geral de Proteção
+de Dados Pessoais (LGPD). Diário Oficial da União, Brasília, DF, 15 ago. 2018. Disponível
+em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso em:
+18 abr. 2026.
+</p>
+
+<p class="ref">
+MOZILLA DEVELOPER NETWORK (MDN). <strong>Web technology for developers.</strong>
+Mozilla Foundation, 2024. Disponível em: https://developer.mozilla.org. Acesso em:
+18 abr. 2026.
+</p>
+
+<p class="ref">
+NIELSEN, Jakob; LORANGER, Hoa. <strong>Prioritizing web usability.</strong> Berkeley:
+New Riders Press, 2006.
+</p>
+
+<p class="ref">
+NIELSEN NORMAN GROUP. <strong>Mobile User Experience: Limitations and Strengths.</strong>
+Nielsen Norman Group, 2023. Disponível em: https://www.nngroup.com/articles/mobile-ux/.
+Acesso em: 18 abr. 2026.
+</p>
+
+<p class="ref">
+W3C – WORLD WIDE WEB CONSORTIUM. <strong>Web Content Accessibility Guidelines
+(WCAG) 2.1.</strong> W3C Recommendation, 2018. Disponível em:
+https://www.w3.org/TR/WCAG21/. Acesso em: 18 abr. 2026.
+</p>
+
+<p class="ref">
+WE ARE SOCIAL; MELTWATER. <strong>Digital 2024: Global Overview Report.</strong>
+We Are Social Ltd., jan. 2024. Disponível em: https://wearesocial.com/br/blog/2024/01/digital-2024/.
+Acesso em: 18 abr. 2026.
+</p>
+
+<p class="ref">
+CAELUM. <strong>Apostila HTML, CSS e JavaScript.</strong> Caelum Ensino e Inovação,
+2023. Disponível em: https://www.caelum.com.br/apostila-html-css-javascript. Acesso em:
+18 abr. 2026.
+</p>
+
+<p class="ref">
+GARRETT, Jesse James. <strong>The Elements of User Experience: User-Centered Design
+for the Web and Beyond.</strong> 2. ed. Berkeley: New Riders, 2011.
+</p>
+
+<p class="ref">
+AUTORIDADE NACIONAL DE PROTEÇÃO DE DADOS (ANPD). <strong>Guia Orientativo para
+Definições dos Agentes de Tratamento de Dados Pessoais e do Encarregado.</strong>
+Brasília: ANPD, 2021. Disponível em:
+https://www.gov.br/anpd/pt-br/documentos-e-publicacoes/guias-e-orientacoes.
+Acesso em: 18 abr. 2026.
+</p>
+
+
+<!-- ============================================================
+     DECLARAÇÃO DE USO DE IA (OBRIGATÓRIA)
+============================================================ -->
+<h2 class="quebra">Declaração de Uso de Inteligência Artificial</h2>
+
+<div class="decl">
+  <h3>Declaração obrigatória — conforme orientação do roteiro da atividade</h3>
+  <p style="text-indent:0;margin-top:0.3cm;">
+    No desenvolvimento desta atividade, foram utilizadas ferramentas de Inteligência
+    Artificial generativa como recurso de apoio técnico às seguintes etapas:
+  </p>
+  <ul>
+    <li><strong>Ferramenta utilizada:</strong> Claude (Anthropic) — assistente de IA,
+    acessado por meio do Claude Code (extensão do VS Code).</li>
+    <li><strong>Objetivo de uso:</strong> Geração do código-fonte HTML, CSS e JavaScript
+    da aplicação (Entrega Técnica – Opção B), revisão ortográfica e organização
+    estrutural dos textos das seções 5 a 9 do documento.</li>
+    <li><strong>Prompts utilizados:</strong> Instruções para geração de código
+    mobile-first, implementação de fluxos de LGPD, estruturação do plano de testes
+    e geração do texto acadêmico das seções complementares.</li>
+    <li><strong>Trechos aproveitados:</strong> Código-fonte integral das páginas
+    HTML e dos arquivos CSS/JavaScript; texto das seções 5 (LGPD), 6 (Entrega
+    Técnica), 7 (Plano de Testes), 8 (Conclusão) e 9 (Referências).</li>
+    <li><strong>Responsabilidade autoral:</strong> O aluno é responsável pela
+    revisão, validação e submissão do conteúdo gerado, tendo exercido julgamento
+    crítico sobre todas as decisões técnicas e de projeto apresentadas neste
+    documento.</li>
+  </ul>
+</div>
+
+
+</body>
+</html>

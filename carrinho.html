@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Carrinho</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <a href="cardapio.html" class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Meu Carrinho</span></div>
+  </a>
+  <div class="header__actions">
+    <button class="btn-icon" onclick="irPara('carrinho.html')" title="Carrinho">
+      🛒<span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="desktop-nav">
+  <a href="index.html">Início</a>
+  <a href="cardapio.html">Cardápio</a>
+  <a href="fidelidade.html">Fidelidade</a>
+  <a href="acompanhamento.html">Meu Pedido</a>
+  <a href="login.html">Entrar</a>
+</nav>
+
+<main class="container">
+
+  <!-- EMPTY STATE -->
+  <div id="empty-cart" class="hidden text-center" style="padding:60px 0;">
+    <div style="font-size:3.5rem;">🛒</div>
+    <div class="page-title mt-12">Seu carrinho está vazio</div>
+    <div class="text-muted mb-16">Adicione itens deliciosos do nosso cardápio!</div>
+    <a href="cardapio.html" class="btn btn-primary btn-inline">🍽️ Ver Cardápio</a>
+  </div>
+
+  <!-- CARRINHO COM ITENS -->
+  <div id="conteudo-carrinho">
+
+    <div class="page-title mt-16">🛒 Seu Pedido</div>
+    <div class="text-muted mb-12" id="unidade-carrinho"></div>
+
+    <!-- LISTA DE ITENS -->
+    <div class="card mb-12">
+      <div id="lista-carrinho"></div>
+    </div>
+
+    <!-- OBSERVAÇÃO -->
+    <div class="form-group">
+      <label class="form-label" for="obs">Observações (opcional)</label>
+      <input type="text" id="obs" class="form-control"
+        placeholder="Ex: sem coentro, ponto da carne, alergias...">
+    </div>
+
+    <!-- PONTOS DE FIDELIDADE -->
+    <div id="secao-pontos" class="card mb-12 hidden">
+      <div class="section-title">⭐ Usar Pontos de Fidelidade</div>
+      <div class="flex-between">
+        <div>
+          <div style="font-size:.9rem;">Você tem <strong id="pontos-disponiveis">0</strong> pontos</div>
+          <div class="text-muted" style="font-size:.78rem;">Cada 50 pts = R$ 5,00 de desconto</div>
+        </div>
+        <div class="form-check" style="margin:0;">
+          <input type="checkbox" id="usar-pontos" onchange="calcularTotal()">
+          <label for="usar-pontos">Usar</label>
+        </div>
+      </div>
+      <div id="desconto-pontos" class="alert alert-success mt-8 hidden">
+        <span>⭐</span><span>Desconto de <strong id="valor-desconto">R$ 0,00</strong> aplicado!</span>
+      </div>
+    </div>
+
+    <!-- TOTAIS -->
+    <div class="card mb-16">
+      <div class="totals-row">
+        <span>Subtotal</span>
+        <span id="subtotal">R$ 0,00</span>
+      </div>
+      <div class="totals-row" id="linha-desconto" style="display:none;">
+        <span>Desconto (pontos)</span>
+        <span id="valor-desc-total" style="color:var(--c-success);">–R$ 0,00</span>
+      </div>
+      <div class="totals-row total-final">
+        <span>Total</span>
+        <span id="total-final">R$ 0,00</span>
+      </div>
+      <div class="text-muted mt-8" style="font-size:.78rem;">
+        ⭐ Este pedido renderá <strong id="pontos-ganhar">0</strong> pontos de fidelidade!
+      </div>
+    </div>
+
+    <!-- BOTÕES -->
+    <button class="btn btn-primary" onclick="irParaCheckout()">
+      Ir para Pagamento →
+    </button>
+    <a href="cardapio.html" class="btn btn-ghost mt-8">
+      ← Continuar Comprando
+    </a>
+
+  </div>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav__item"><span class="icon">🏠</span>Início</a>
+  <a href="cardapio.html" class="bottom-nav__item"><span class="icon">🍽️</span>Cardápio</a>
+  <a href="fidelidade.html" class="bottom-nav__item"><span class="icon">⭐</span>Fidelidade</a>
+  <a href="acompanhamento.html" class="bottom-nav__item"><span class="icon">📦</span>Pedido</a>
+  <a href="login.html" class="bottom-nav__item"><span class="icon">👤</span>Conta</a>
+</nav>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  const usuario = getUsuario();
+  const unidade = getUnidade();
+
+  function renderCarrinho() {
+    const carrinho = getCarrinho();
+
+    if (carrinho.length === 0) {
+      document.getElementById('empty-cart').classList.remove('hidden');
+      document.getElementById('conteudo-carrinho').classList.add('hidden');
+      return;
+    }
+
+    document.getElementById('empty-cart').classList.add('hidden');
+    document.getElementById('conteudo-carrinho').classList.remove('hidden');
+
+    if (unidade) {
+      document.getElementById('unidade-carrinho').textContent = `📍 ${unidade.nome}`;
+    }
+
+    document.getElementById('lista-carrinho').innerHTML = carrinho.map(item => `
+      <div class="cart-item">
+        <div class="cart-item__emoji">${item.emoji}</div>
+        <div class="cart-item__info">
+          <div class="cart-item__name">${item.nome}</div>
+          <div class="cart-item__unit">${formatarPreco(item.preco)} × ${item.qtd}</div>
+        </div>
+        <div class="qty-control">
+          <button class="qty-btn minus" onclick="alterarQtd(${item.id}, -1)">−</button>
+          <span class="qty-num">${item.qtd}</span>
+          <button class="qty-btn plus" onclick="alterarQtd(${item.id}, 1)">+</button>
+        </div>
+        <div class="cart-item__total">${formatarPreco(item.preco * item.qtd)}</div>
+      </div>
+    `).join('');
+
+    /* Pontos de fidelidade */
+    if (usuario && !usuario.convidado && usuario.pontos >= 50) {
+      document.getElementById('secao-pontos').classList.remove('hidden');
+      document.getElementById('pontos-disponiveis').textContent = usuario.pontos;
+    }
+
+    calcularTotal();
+  }
+
+  function alterarQtd(id, delta) {
+    if (delta > 0) {
+      const produto = DADOS.cardapio.find(p => p.id === id);
+      if (produto) adicionarAoCarrinho(produto);
+    } else {
+      removerDoCarrinho(id);
+    }
+    renderCarrinho();
+  }
+
+  function calcularTotal() {
+    const subtotal = totalCarrinho();
+    const usarPontos = document.getElementById('usar-pontos')?.checked;
+    const pontos = usuario ? Math.floor(usuario.pontos / 50) * 50 : 0;
+    const desconto = usarPontos ? (pontos / 50) * 5 : 0;
+    const total = Math.max(0, subtotal - desconto);
+    const pontosGanhar = Math.floor(total);
+
+    document.getElementById('subtotal').textContent = formatarPreco(subtotal);
+    document.getElementById('total-final').textContent = formatarPreco(total);
+    document.getElementById('pontos-ganhar').textContent = pontosGanhar;
+
+    if (usarPontos && desconto > 0) {
+      document.getElementById('desconto-pontos').classList.remove('hidden');
+      document.getElementById('valor-desconto').textContent = formatarPreco(desconto);
+      document.getElementById('linha-desconto').style.display = 'flex';
+      document.getElementById('valor-desc-total').textContent = `–${formatarPreco(desconto)}`;
+    } else {
+      document.getElementById('desconto-pontos')?.classList.add('hidden');
+      document.getElementById('linha-desconto').style.display = 'none';
+    }
+  }
+
+  function irParaCheckout() {
+    const carrinho = getCarrinho();
+    if (carrinho.length === 0) return;
+
+    const obs = document.getElementById('obs').value;
+    const usarPontos = document.getElementById('usar-pontos')?.checked || false;
+    const subtotal = totalCarrinho();
+    const desconto = usarPontos ? (Math.floor((usuario?.pontos || 0) / 50) * 5) : 0;
+
+    setPedido({
+      itens: carrinho,
+      obs,
+      subtotal,
+      desconto,
+      total: Math.max(0, subtotal - desconto),
+      unidade: getUnidade(),
+      usarPontos
+    });
+
+    irPara('checkout.html');
+  }
+
+  renderCarrinho();
+</script>
+</body>
+</html>

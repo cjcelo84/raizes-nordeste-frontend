@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raízes do Nordeste – Entrar / Criar Conta</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="totem-header" style="display:none;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+
+<header class="header">
+  <a href="index.html" class="header__logo">
+    <div class="header__logo-icon">🌵</div>
+    <div>Raízes do Nordeste<span>Minha Conta</span></div>
+  </a>
+  <div class="header__actions">
+    <button class="btn-icon" onclick="irPara('carrinho.html')" title="Carrinho">
+      🛒<span class="badge" id="cart-badge" style="display:none;">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="desktop-nav">
+  <a href="index.html">Início</a>
+  <a href="cardapio.html">Cardápio</a>
+  <a href="fidelidade.html">Fidelidade</a>
+  <a href="acompanhamento.html">Meu Pedido</a>
+  <a href="login.html" class="active">Entrar</a>
+</nav>
+
+<main class="container">
+
+  <!-- AVISO LGPD TOPO -->
+  <div class="lgpd-banner mt-16">
+    <div class="lgpd-banner__icon">🔒</div>
+    <div class="lgpd-banner__text">
+      <span class="lgpd-banner__title">Seus dados estão protegidos — LGPD</span>
+      Coletamos apenas os dados necessários para o funcionamento do sistema.
+      Você pode revogar seu consentimento a qualquer momento nas configurações da conta.
+    </div>
+  </div>
+
+  <!-- TABS: Login / Criar Conta -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="mudarAba('login')">Entrar</button>
+    <button class="tab-btn" onclick="mudarAba('cadastro')">Criar Conta</button>
+    <button class="tab-btn" onclick="continuarSemCadastro()">Convidado</button>
+  </div>
+
+  <!-- ===== ABA: LOGIN ===== -->
+  <div id="aba-login">
+    <div class="card">
+      <div class="page-title mb-8">👋 Bem-vindo de volta!</div>
+      <div class="text-muted mb-16">Entre com seu e-mail e senha.</div>
+
+      <div class="form-group">
+        <label class="form-label" for="login-email">E-mail</label>
+        <input type="email" id="login-email" class="form-control" placeholder="seuemail@exemplo.com">
+        <div class="form-error" id="err-login-email">E-mail inválido</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="login-senha">Senha</label>
+        <input type="password" id="login-senha" class="form-control" placeholder="Sua senha">
+        <div class="form-error" id="err-login-senha">Senha obrigatória</div>
+      </div>
+
+      <div id="alert-login" class="alert alert-error hidden">
+        <span>❌</span><span>E-mail ou senha incorretos. Tente novamente.</span>
+      </div>
+
+      <button class="btn btn-primary" onclick="fazerLogin()">Entrar →</button>
+
+      <div class="text-center mt-12">
+        <a href="#" onclick="mudarAba('cadastro')">Ainda não tem conta? <strong>Criar agora</strong></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABA: CADASTRO ===== -->
+  <div id="aba-cadastro" class="hidden">
+    <div class="card">
+      <div class="page-title mb-8">🎉 Crie sua conta</div>
+      <div class="text-muted mb-16">Rápido, gratuito e com vantagens exclusivas!</div>
+
+      <div class="form-group">
+        <label class="form-label" for="cad-nome">Nome completo *</label>
+        <input type="text" id="cad-nome" class="form-control" placeholder="João da Silva">
+        <div class="form-error" id="err-cad-nome">Nome obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cad-email">E-mail *</label>
+        <input type="email" id="cad-email" class="form-control" placeholder="joao@email.com">
+        <div class="form-error" id="err-cad-email">E-mail inválido</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cad-telefone">Telefone / WhatsApp *</label>
+        <input type="tel" id="cad-telefone" class="form-control" placeholder="(11) 99999-9999">
+        <div class="form-error" id="err-cad-tel">Telefone obrigatório</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cad-cpf">CPF *</label>
+        <input type="text" id="cad-cpf" class="form-control" placeholder="000.000.000-00" maxlength="14">
+        <div class="form-error" id="err-cad-cpf">CPF inválido</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cad-senha">Senha *</label>
+        <input type="password" id="cad-senha" class="form-control" placeholder="Mínimo 6 caracteres">
+        <div class="form-error" id="err-cad-senha">Senha com no mínimo 6 caracteres</div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-title">🔒 Privacidade e Consentimento (LGPD)</div>
+
+      <!-- CONSENTIMENTO OBRIGATÓRIO -->
+      <div class="form-check">
+        <input type="checkbox" id="lgpd-termos" required>
+        <label for="lgpd-termos">
+          <strong>*</strong> Li e aceito os <a href="#" onclick="abrirModal('modal-termos')">Termos de Uso</a>
+          e a <a href="#" onclick="abrirModal('modal-privacidade')">Política de Privacidade</a>.
+          Autorizo o tratamento dos meus dados pessoais (nome, e-mail, CPF e telefone)
+          para realização de pedidos e gestão da conta, conforme a LGPD (Lei 13.709/2018).
+        </label>
+      </div>
+      <div class="form-error" id="err-lgpd" style="margin-top:-6px;margin-bottom:10px;">Aceite obrigatório para prosseguir</div>
+
+      <!-- CONSENTIMENTO OPCIONAL -->
+      <div class="form-check">
+        <input type="checkbox" id="lgpd-fidelidade">
+        <label for="lgpd-fidelidade">
+          Aceito participar do <strong>Programa de Fidelidade</strong> e receber comunicações
+          personalizadas sobre promoções e novidades por e-mail e WhatsApp.
+          <em>(Opcional – você pode revogar a qualquer momento)</em>
+        </label>
+      </div>
+
+      <div id="alert-cadastro" class="alert alert-error hidden mt-8">
+        <span>❌</span><span id="msg-alert-cadastro">Preencha todos os campos obrigatórios.</span>
+      </div>
+
+      <button class="btn btn-primary mt-8" onclick="criarConta()">Criar Conta e Continuar →</button>
+
+      <div class="text-center mt-12">
+        <a href="#" onclick="mudarAba('login')">Já tenho conta. <strong>Entrar</strong></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONVIDADO ===== -->
+  <div id="aba-convidado" class="hidden">
+    <div class="card">
+      <div class="page-title mb-8">👤 Continuar como Convidado</div>
+      <div class="text-muted mb-16">
+        Você pode fazer pedidos sem criar uma conta.<br>
+        Seus pontos de fidelidade <strong>não serão acumulados</strong> neste modo.
+      </div>
+
+      <div class="lgpd-banner">
+        <div class="lgpd-banner__icon">📋</div>
+        <div class="lgpd-banner__text">
+          <span class="lgpd-banner__title">Consentimento de Uso (LGPD)</span>
+          Ao continuar, você autoriza o tratamento dos seus dados de navegação e pedido
+          exclusivamente para processar esta transação. Nenhum dado será armazenado após
+          a conclusão do pedido.
+        </div>
+      </div>
+
+      <div class="form-check">
+        <input type="checkbox" id="lgpd-convidado">
+        <label for="lgpd-convidado">
+          <strong>*</strong> Entendi e aceito os termos acima para continuar como convidado.
+        </label>
+      </div>
+      <div class="form-error" id="err-lgpd-convidado">Aceite obrigatório para prosseguir</div>
+
+      <button class="btn btn-primary mt-12" onclick="entrarComoConvidado()">
+        Continuar sem Cadastro →
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav__item"><span class="icon">🏠</span>Início</a>
+  <a href="cardapio.html" class="bottom-nav__item"><span class="icon">🍽️</span>Cardápio</a>
+  <a href="fidelidade.html" class="bottom-nav__item"><span class="icon">⭐</span>Fidelidade</a>
+  <a href="acompanhamento.html" class="bottom-nav__item"><span class="icon">📦</span>Pedido</a>
+  <a href="login.html" class="bottom-nav__item active"><span class="icon">👤</span>Conta</a>
+</nav>
+
+<!-- MODAL: Termos de Uso -->
+<div class="modal-overlay hidden" id="modal-termos" onclick="fecharModal('modal-termos')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>📄 Termos de Uso</h3>
+    <p>Ao utilizar o sistema de pedidos da Rede Raízes do Nordeste, você concorda com as condições de uso
+    da plataforma, incluindo a política de cancelamento, responsabilidade sobre os dados informados
+    e condições gerais de compra.</p>
+    <p>Os pedidos realizados estão sujeitos à disponibilidade de itens na unidade selecionada.
+    O pagamento é processado por serviços externos parceiros (gateways de pagamento certificados pelo Banco Central).</p>
+    <p>A Rede Raízes do Nordeste reserva-se o direito de alterar estes termos mediante aviso prévio de 15 dias.</p>
+    <button class="btn btn-primary" onclick="fecharModal('modal-termos')">Entendido ✓</button>
+  </div>
+</div>
+
+<!-- MODAL: Política de Privacidade -->
+<div class="modal-overlay hidden" id="modal-privacidade" onclick="fecharModal('modal-privacidade')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <h3>🔒 Política de Privacidade (LGPD)</h3>
+    <p><strong>Dados coletados:</strong> Nome, e-mail, CPF, telefone e histórico de pedidos.</p>
+    <p><strong>Finalidade:</strong> Processar pedidos, gerenciar conta e, com seu consentimento opcional,
+    enviar promoções personalizadas.</p>
+    <p><strong>Base legal:</strong> Consentimento (Art. 7º, I – Lei 13.709/2018) e execução de contrato.</p>
+    <p><strong>Compartilhamento:</strong> Dados de pagamento são transmitidos de forma criptografada ao
+    gateway externo (não armazenamos dados de cartão). Nunca vendemos seus dados a terceiros.</p>
+    <p><strong>Seus direitos:</strong> Acesso, correção, exclusão e portabilidade dos dados. Contato: privacidade@raizesnordeste.com.br</p>
+    <button class="btn btn-primary" onclick="fecharModal('modal-privacidade')">Entendido ✓</button>
+  </div>
+</div>
+
+<script src="js/dados.js"></script>
+<script src="js/app.js"></script>
+<script>
+  /* Verificar se já está logado */
+  if (getUsuario()) irPara('cardapio.html');
+
+  function mudarAba(aba) {
+    ['login','cadastro','convidado'].forEach(a => {
+      document.getElementById(`aba-${a}`).classList.add('hidden');
+    });
+    document.getElementById(`aba-${aba}`).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', ['login','cadastro','convidado'][i] === aba);
+    });
+  }
+
+  function continuarSemCadastro() { mudarAba('convidado'); }
+
+  function abrirModal(id) {
+    document.getElementById(id).classList.remove('hidden');
+  }
+  function fecharModal(id) {
+    document.getElementById(id).classList.add('hidden');
+  }
+
+  function fazerLogin() {
+    const email = document.getElementById('login-email').value.trim();
+    const senha = document.getElementById('login-senha').value;
+    let ok = true;
+
+    if (!email.includes('@')) {
+      document.getElementById('err-login-email').classList.add('show'); ok = false;
+    } else { document.getElementById('err-login-email').classList.remove('show'); }
+
+    if (!senha) {
+      document.getElementById('err-login-senha').classList.add('show'); ok = false;
+    } else { document.getElementById('err-login-senha').classList.remove('show'); }
+
+    if (!ok) return;
+
+    /* Simulação: qualquer e-mail + senha válidos = login ok */
+    const usuario = {
+      nome: email.split('@')[0].replace('.', ' '),
+      email: email,
+      pontos: 120,
+      convidado: false
+    };
+    setUsuario(usuario);
+    marcarLgpd();
+    irPara('cardapio.html');
+  }
+
+  function criarConta() {
+    const nome    = document.getElementById('cad-nome').value.trim();
+    const email   = document.getElementById('cad-email').value.trim();
+    const tel     = document.getElementById('cad-telefone').value.trim();
+    const cpf     = document.getElementById('cad-cpf').value.trim();
+    const senha   = document.getElementById('cad-senha').value;
+    const lgpd    = document.getElementById('lgpd-termos').checked;
+    let ok = true;
+
+    if (!nome)              { document.getElementById('err-cad-nome').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-cad-nome').classList.remove('show'); }
+    if (!email.includes('@')){ document.getElementById('err-cad-email').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-cad-email').classList.remove('show'); }
+    if (!tel)               { document.getElementById('err-cad-tel').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-cad-tel').classList.remove('show'); }
+    if (!cpf)               { document.getElementById('err-cad-cpf').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-cad-cpf').classList.remove('show'); }
+    if (senha.length < 6)   { document.getElementById('err-cad-senha').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-cad-senha').classList.remove('show'); }
+    if (!lgpd)              { document.getElementById('err-lgpd').classList.add('show'); ok = false; }
+    else                    { document.getElementById('err-lgpd').classList.remove('show'); }
+
+    if (!ok) {
+      document.getElementById('alert-cadastro').classList.remove('hidden');
+      return;
+    }
+
+    const fidelidade = document.getElementById('lgpd-fidelidade').checked;
+    const usuario = {
+      nome, email, telefone: tel, cpf,
+      pontos: 100, /* bônus boas-vindas */
+      fidelidade,
+      convidado: false,
+      novo: true
+    };
+    setUsuario(usuario);
+    marcarLgpd();
+    irPara('cardapio.html');
+  }
+
+  function entrarComoConvidado() {
+    const ok = document.getElementById('lgpd-convidado').checked;
+    if (!ok) {
+      document.getElementById('err-lgpd-convidado').classList.add('show');
+      return;
+    }
+    document.getElementById('err-lgpd-convidado').classList.remove('show');
+    const usuario = { nome: 'Convidado', convidado: true, pontos: 0 };
+    setUsuario(usuario);
+    marcarLgpd();
+    irPara('cardapio.html');
+  }
+</script>
+</body>
+</html>
