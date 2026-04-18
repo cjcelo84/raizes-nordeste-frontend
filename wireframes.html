@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Wireframes — Raízes do Nordeste</title>
+  <style>
+    /* ---- CONFIG GERAL ---- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #E8E8E8;
+      padding: 30px 20px;
+      color: #333;
+    }
+
+    /* ---- INSTRUÇÃO (some na impressão) ---- */
+    .instrucao {
+      background: #FFF8E1;
+      border: 2px solid #F5A623;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      line-height: 1.7;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .instrucao strong { font-size: 14px; display: block; margin-bottom: 6px; }
+    @media print { .instrucao { display: none; } }
+
+    /* ---- TÍTULO DE GRUPO ---- */
+    .grupo-titulo {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #444;
+      margin: 40px 0 16px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .grupo-titulo:first-of-type { margin-top: 0; }
+
+    /* ---- GRADE DE FRAMES ---- */
+    .grade {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    /* ---- FRAME DO CELULAR ---- */
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .phone-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+    .phone {
+      width: 320px;
+      border: 3px solid #555;
+      border-radius: 24px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      position: relative;
+    }
+    /* notch topo */
+    .phone::before {
+      content: '';
+      display: block;
+      width: 60px; height: 10px;
+      background: #555;
+      border-radius: 0 0 8px 8px;
+      margin: 0 auto 0;
+    }
+
+    /* ---- FRAME DESKTOP ---- */
+    .desktop-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .desktop {
+      width: 100%;
+      border: 3px solid #555;
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    }
+
+    /* ---- ELEMENTOS DE WIREFRAME ---- */
+
+    /* Barra de status fake */
+    .wf-status { height: 6px; background: #bbb; }
+
+    /* Header */
+    .wf-header {
+      background: #555;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .wf-header-logo {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .wf-circle {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #999;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .wf-header-icons { display: flex; gap: 6px; }
+    .wf-icon-box {
+      width: 26px; height: 26px;
+      border: 1.5px solid rgba(255,255,255,.6);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+
+    /* Sub-header */
+    .wf-subheader {
+      background: #777;
+      display: flex;
+      gap: 0;
+    }
+    .wf-subheader span {
+      flex: 1; text-align: center;
+      padding: 5px 4px;
+      font-size: 9px;
+      color: rgba(255,255,255,.8);
+      border-right: 1px solid rgba(255,255,255,.2);
+    }
+    .wf-subheader span:last-child { border-right: none; }
+    .wf-subheader span.active { color: #fff; font-weight: bold; border-bottom: 2px solid #fff; }
+
+    /* Conteúdo interno */
+    .wf-body { padding: 10px; }
+
+    /* Banner hero */
+    .wf-hero {
+      background: #555;
+      color: #fff;
+      text-align: center;
+      padding: 16px 10px;
+      margin-bottom: 10px;
+    }
+    .wf-hero-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+    .wf-hero-sub { font-size: 9px; opacity: .8; margin-bottom: 10px; }
+    .wf-hero-btns { display: flex; gap: 6px; justify-content: center; }
+    .wf-btn-hero {
+      background: rgba(255,255,255,.25);
+      border: 1px solid rgba(255,255,255,.6);
+      color: #fff;
+      font-size: 9px;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    /* Seção com título */
+    .wf-section-title {
+      font-size: 10px;
+      font-weight: bold;
+      color: #444;
+      margin: 10px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    /* Grid de canais */
+    .wf-canal-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 10px; }
+    .wf-canal-card {
+      border: 1.5px solid #bbb;
+      border-radius: 8px;
+      padding: 8px 4px;
+      text-align: center;
+      background: #f5f5f5;
+    }
+    .wf-canal-icon { font-size: 16px; margin-bottom: 3px; }
+    .wf-canal-name { font-size: 8px; font-weight: bold; color: #444; }
+    .wf-canal-desc { font-size: 7px; color: #888; }
+
+    /* Cards de unidade */
+    .wf-unit-card {
+      border: 1.5px solid #bbb;
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 6px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wf-unit-card.sel { border-color: #555; background: #eee; }
+    .wf-unit-icon { font-size: 18px; }
+    .wf-unit-info { flex: 1; }
+    .wf-unit-name { font-size: 9px; font-weight: bold; color: #333; }
+    .wf-unit-addr { font-size: 8px; color: #777; }
+    .wf-unit-check { font-size: 12px; color: #555; }
+
+    /* Botão primário */
+    .wf-btn {
+      background: #555;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    .wf-btn.outline {
+      background: transparent;
+      border: 1.5px solid #888;
+      color: #555;
+    }
+    .wf-btn.sm { padding: 6px 10px; font-size: 9px; border-radius: 50px; display: inline-block; }
+
+    /* Promo banner */
+    .wf-promo {
+      background: #888;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      font-size: 9px;
+    }
+    .wf-promo-badge { background: rgba(0,0,0,.25); font-size: 8px; padding: 1px 6px; border-radius: 20px; display: inline-block; margin-bottom: 3px; }
+    .wf-promo-title { font-weight: bold; }
+
+    /* Search */
+    .wf-search {
+      border: 1.5px solid #bbb;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 9px;
+      color: #aaa;
+      margin-bottom: 8px;
+      background: #fafafa;
+    }
+
+    /* Chips */
+    .wf-chips { display: flex; gap: 5px; margin-bottom: 8px; overflow: hidden; }
+    .wf-chip {
+      border: 1.5px solid #bbb;
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 8px;
+      white-space: nowrap;
+      color: #666;
+      background: #fff;
+    }
+    .wf-chip.active { background: #555; color: #fff; border-color: #555; }
+
+    /* Product card */
+    .wf-product {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: #fff;
+    }
+    .wf-prod-img {
+      width: 56px; height: 56px; min-width: 56px;
+      background: #ddd;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .wf-prod-info { flex: 1; }
+    .wf-prod-name { font-size: 9px; font-weight: bold; color: #333; margin-bottom: 2px; }
+    .wf-prod-desc { font-size: 8px; color: #999; margin-bottom: 4px; }
+    .wf-prod-footer { display: flex; align-items: center; justify-content: space-between; }
+    .wf-prod-price { font-size: 10px; font-weight: bold; color: #555; }
+    .wf-add-btn {
+      background: #555; color: #fff;
+      font-size: 8px; padding: 4px 8px;
+      border-radius: 20px;
+    }
+    .wf-qty { display: flex; align-items: center; gap: 4px; }
+    .wf-qty-btn {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #555; color: #fff;
+      font-size: 10px; display: flex; align-items: center; justify-content: center;
+    }
+    .wf-qty-btn.minus { background: #ccc; color: #333; }
+    .wf-qty-num { font-size: 10px; font-weight: bold; }
+
+    /* FAB */
+    .wf-fab {
+      background: #555; color: #fff;
+      text-align: center;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 9px;
+      margin: 6px 0;
+      font-weight: bold;
+    }
+
+    /* LGPD banner */
+    .wf-lgpd {
+      background: #f5f0e0;
+      border: 1px solid #ccc;
+      border-left: 3px solid #888;
+      border-radius: 6px;
+      padding: 7px 8px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 6px;
+      font-size: 8px;
+      color: #555;
+      line-height: 1.5;
+    }
+    .wf-lgpd-icon { font-size: 14px; flex-shrink: 0; }
+    .wf-lgpd-title { font-weight: bold; display: block; margin-bottom: 2px; font-size: 9px; }
+
+    /* Tabs */
+    .wf-tabs {
+      display: flex;
+      background: #ddd;
+      border-radius: 20px;
+      padding: 3px;
+      margin-bottom: 10px;
+      gap: 3px;
+    }
+    .wf-tab {
+      flex: 1; text-align: center;
+      padding: 5px 4px;
+      border-radius: 20px;
+      font-size: 9px;
+      color: #777;
+    }
+    .wf-tab.active { background: #555; color: #fff; font-weight: bold; }
+
+    /* Form group */
+    .wf-form-group { margin-bottom: 8px; }
+    .wf-label { font-size: 8px; font-weight: bold; color: #777; text-transform: uppercase; margin-bottom: 3px; display: block; }
+    .wf-input {
+      border: 1.5px solid #ccc; border-radius: 6px;
+      padding: 7px 8px; font-size: 9px; color: #aaa;
+      background: #fafafa; width: 100%;
+    }
+    .wf-check { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
+    .wf-check-box { width: 14px; height: 14px; min-width: 14px; border: 1.5px solid #999; border-radius: 3px; margin-top: 1px; background: #fff; }
+    .wf-check-box.checked { background: #555; border-color: #555; }
+    .wf-check-label { font-size: 8px; color: #555; line-height: 1.4; }
+    .wf-check-label a { color: #333; text-decoration: underline; }
+
+    /* Cart item */
+    .wf-cart-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .wf-cart-emoji { font-size: 22px; }
+    .wf-cart-info { flex: 1; }
+    .wf-cart-name { font-size: 9px; font-weight: bold; }
+    .wf-cart-unit { font-size: 8px; color: #999; }
+    .wf-cart-total { font-size: 10px; font-weight: bold; color: #555; white-space: nowrap; }
+
+    /* Totals */
+    .wf-total-row {
+      display: flex; justify-content: space-between;
+      padding: 5px 0; font-size: 9px;
+      border-bottom: 1px solid #eee;
+      color: #444;
+    }
+    .wf-total-row.final { font-weight: bold; font-size: 11px; color: #333; border-bottom: none; }
+
+    /* Payment option */
+    .wf-pay-opt {
+      display: flex; align-items: center; gap: 8px;
+      border: 1.5px solid #ccc; border-radius: 8px;
+      padding: 8px; margin-bottom: 6px;
+      background: #fafafa;
+    }
+    .wf-pay-opt.sel { border-color: #555; background: #f0f0f0; }
+    .wf-radio { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid #999; background: #fff; flex-shrink: 0; }
+    .wf-radio.sel { background: #555; border-color: #555; }
+    .wf-pay-icon { font-size: 18px; }
+    .wf-pay-name { font-size: 9px; font-weight: bold; color: #333; }
+    .wf-pay-desc { font-size: 8px; color: #999; }
+
+    /* Spinner */
+    .wf-spinner {
+      width: 40px; height: 40px;
+      border: 4px solid #ddd; border-top-color: #555;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+    }
+
+    /* Order number */
+    .wf-order-num {
+      background: #555; color: #fff;
+      border-radius: 8px; padding: 14px;
+      text-align: center; margin-bottom: 10px;
+    }
+    .wf-order-num-label { font-size: 9px; opacity: .8; margin-bottom: 4px; }
+    .wf-order-num-val { font-size: 32px; font-weight: 900; letter-spacing: 4px; }
+
+    /* Status step */
+    .wf-status-steps { padding: 4px 0; }
+    .wf-step {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 8px 0;
+      position: relative;
+    }
+    .wf-step::before {
+      content: '';
+      position: absolute;
+      left: 16px; top: 44px; bottom: -8px;
+      width: 2px; background: #ccc;
+    }
+    .wf-step:last-child::before { display: none; }
+    .wf-step.done::before { background: #555; }
+    .wf-step-dot {
+      width: 34px; height: 34px; min-width: 34px;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      border: 2px solid #ccc;
+    }
+    .wf-step.done .wf-step-dot { background: #555; border-color: #555; }
+    .wf-step.active .wf-step-dot { background: #eee; border-color: #555; }
+    .wf-step-content { padding-top: 4px; }
+    .wf-step-title { font-size: 9px; font-weight: bold; color: #333; }
+    .wf-step-desc { font-size: 8px; color: #999; }
+
+    /* Points card */
+    .wf-points {
+      background: #555; color: #fff;
+      border-radius: 8px; padding: 16px;
+      text-align: center; margin-bottom: 8px;
+    }
+    .wf-points-num { font-size: 28px; font-weight: 900; line-height: 1; }
+    .wf-points-label { font-size: 9px; opacity: .8; margin-top: 4px; }
+
+    /* Reward item */
+    .wf-reward {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px; border: 1px solid #ddd; border-radius: 6px;
+      margin-bottom: 6px; background: #fafafa;
+    }
+    .wf-reward-icon { font-size: 22px; }
+    .wf-reward-info { flex: 1; }
+    .wf-reward-name { font-size: 9px; font-weight: bold; }
+    .wf-reward-pts { font-size: 8px; color: #999; }
+
+    /* Bottom nav */
+    .wf-bottom-nav {
+      border-top: 1px solid #ddd;
+      display: flex;
+      background: #fff;
+    }
+    .wf-nav-item {
+      flex: 1; text-align: center;
+      padding: 6px 4px;
+      font-size: 8px; color: #aaa;
+    }
+    .wf-nav-item .ni { font-size: 14px; display: block; margin-bottom: 1px; }
+    .wf-nav-item.active { color: #555; font-weight: bold; }
+
+    /* Alert */
+    .wf-alert {
+      padding: 7px 8px; border-radius: 5px;
+      font-size: 8px; display: flex; gap: 6px;
+      margin-bottom: 8px; border-left: 3px solid #888;
+      background: #f0f0f0; color: #555;
+    }
+    .wf-alert.success { background: #e8f5e9; color: #2e7d32; border-color: #2e7d32; }
+
+    /* Divider */
+    .wf-divider { border: none; border-top: 1px solid #eee; margin: 8px 0; }
+
+    /* Desktop layout */
+    .wf-desktop-nav {
+      background: #666;
+      display: flex; gap: 0;
+    }
+    .wf-desktop-nav span {
+      color: rgba(255,255,255,.75);
+      padding: 7px 14px;
+      font-size: 9px;
+    }
+    .wf-desktop-nav span.active { color: #fff; font-weight: bold; background: rgba(255,255,255,.12); }
+
+    .wf-desktop-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .wf-desktop-col { padding: 12px; }
+    .wf-desktop-col:first-child { border-right: 1px solid #eee; }
+
+    /* Anotações de componente */
+    .wf-annotation {
+      position: absolute;
+      font-size: 7px;
+      color: #888;
+      background: #fffde7;
+      border: 1px dashed #aaa;
+      padding: 2px 5px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    /* Separador entre grupos */
+    .separator {
+      border: none;
+      border-top: 2px dashed #ccc;
+      margin: 40px auto;
+      max-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- INSTRUÇÃO -->
+<div class="instrucao">
+  <strong>📸 Como usar estes wireframes no documento Word:</strong>
+  1. Abra este arquivo no navegador (Chrome ou Edge)<br>
+  2. Para cada wireframe: pressione <strong>F12 → Ctrl+Shift+P → "Capture node screenshot"</strong>, ou use a tecla <strong>Print Screen</strong> e recorte no Paint<br>
+  3. Cole cada imagem na <strong>Seção 4 do documento Word</strong>, após a descrição de cada tela<br>
+  4. Legenda sugerida: <em>Figura X – Wireframe: [Nome da Tela]. Fonte: Elaborado pelo autor (2026).</em><br>
+  <strong>Dica rápida:</strong> No Chrome, clique com o botão direito em cada wireframe → "Inspecionar" → botão direito no elemento → "Capture node screenshot" para salvar direto como PNG.
+</div>
+
+
+<!-- ============================================================
+     GRUPO 1 — CANAIS MOBILE
+============================================================ -->
+<div class="grupo-titulo">Wireframes — Canais Mobile (375 × 667 px)</div>
+
+<div class="grade">
+
+  <!-- WF01: TELA INICIAL -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF01 · Tela Inicial<br>Seleção de Canal e Unidade</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <!-- Header -->
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Selecione uma unidade</div></div>
+        </div>
+        <div class="wf-header-icons">
+          <div class="wf-icon-box">👤</div>
+          <div class="wf-icon-box">🛒</div>
+        </div>
+      </div>
+      <!-- Hero -->
+      <div class="wf-hero">
+        <div class="wf-hero-title">🌵 Raízes do Nordeste</div>
+        <div class="wf-hero-sub">O sabor autêntico do Nordeste pertinho de você</div>
+        <div class="wf-hero-btns">
+          <div class="wf-btn-hero">🍽️ Ver Cardápio</div>
+          <div class="wf-btn-hero">👤 Entrar</div>
+        </div>
+      </div>
+      <div class="wf-body">
+        <!-- Canais -->
+        <div class="wf-section-title">Como deseja pedir?</div>
+        <div class="wf-canal-grid">
+          <div class="wf-canal-card">
+            <div class="wf-canal-icon">📱</div>
+            <div class="wf-canal-name">App Mobile</div>
+            <div class="wf-canal-desc">No celular</div>
+          </div>
+          <div class="wf-canal-card">
+            <div class="wf-canal-icon">🖥️</div>
+            <div class="wf-canal-name">Totem</div>
+            <div class="wf-canal-desc">Na loja</div>
+          </div>
+          <div class="wf-canal-card">
+            <div class="wf-canal-icon">💻</div>
+            <div class="wf-canal-name">Web</div>
+            <div class="wf-canal-desc">Navegador</div>
+          </div>
+        </div>
+        <!-- Unidades -->
+        <div class="wf-section-title">📍 Selecione a unidade</div>
+        <div class="wf-unit-card sel">
+          <div class="wf-unit-icon">🏪</div>
+          <div class="wf-unit-info">
+            <div class="wf-unit-name">Raízes do Nordeste – Centro</div>
+            <div class="wf-unit-addr">Osasco – SP · Aberto até 22h</div>
+          </div>
+          <div class="wf-unit-check">✔</div>
+        </div>
+        <div class="wf-unit-card">
+          <div class="wf-unit-icon">🏪</div>
+          <div class="wf-unit-info">
+            <div class="wf-unit-name">Raízes do Nordeste – Vila Yara</div>
+            <div class="wf-unit-addr">Osasco – SP · Aberto até 21h</div>
+          </div>
+          <div class="wf-unit-check" style="opacity:0;">✔</div>
+        </div>
+        <div class="wf-btn" style="margin-top:6px;">Continuar para o Cardápio →</div>
+      </div>
+      <!-- Bottom nav -->
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item active"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF02: LOGIN / CADASTRO + LGPD -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF02 · Tela de Login / Cadastro<br>com Consentimento LGPD</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Minha Conta</div></div>
+        </div>
+        <div class="wf-header-icons"><div class="wf-icon-box">🛒</div></div>
+      </div>
+      <div class="wf-body">
+        <!-- LGPD aviso -->
+        <div class="wf-lgpd">
+          <div class="wf-lgpd-icon">🔒</div>
+          <div>
+            <span class="wf-lgpd-title">Seus dados protegidos — LGPD</span>
+            Coletamos apenas dados necessários ao sistema. Revogue o consentimento a qualquer momento.
+          </div>
+        </div>
+        <!-- Tabs -->
+        <div class="wf-tabs">
+          <div class="wf-tab active">Entrar</div>
+          <div class="wf-tab">Criar Conta</div>
+          <div class="wf-tab">Convidado</div>
+        </div>
+        <!-- Form login -->
+        <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;">
+          <div style="font-size:11px;font-weight:bold;margin-bottom:4px;">👋 Bem-vindo de volta!</div>
+          <div style="font-size:9px;color:#999;margin-bottom:10px;">Entre com seu e-mail e senha.</div>
+          <div class="wf-form-group">
+            <label class="wf-label">E-mail</label>
+            <div class="wf-input">seuemail@exemplo.com</div>
+          </div>
+          <div class="wf-form-group">
+            <label class="wf-label">Senha</label>
+            <div class="wf-input">••••••••</div>
+          </div>
+          <div class="wf-divider"></div>
+          <!-- LGPD checkboxes (aba cadastro preview) -->
+          <div style="font-size:9px;font-weight:bold;margin-bottom:6px;">🔒 Privacidade (LGPD)</div>
+          <div class="wf-check">
+            <div class="wf-check-box checked"></div>
+            <div class="wf-check-label">* Aceito os <a>Termos de Uso</a> e a <a>Política de Privacidade</a>. Autorizo tratamento de dados (LGPD Art. 7º, I). <strong>[OBRIGATÓRIO]</strong></div>
+          </div>
+          <div class="wf-check">
+            <div class="wf-check-box"></div>
+            <div class="wf-check-label">Aceito receber promoções e participar do Programa de Fidelidade. <em>(Opcional)</em></div>
+          </div>
+          <div class="wf-btn" style="margin-top:6px;">Entrar →</div>
+          <div style="text-align:center;font-size:8px;margin-top:6px;color:#777;">Ainda não tem conta? <u>Criar agora</u></div>
+        </div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item active"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF03: CARDÁPIO -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF03 · Tela de Cardápio<br>Dinâmico por Unidade</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Centro – Osasco</div></div>
+        </div>
+        <div class="wf-header-icons">
+          <div class="wf-icon-box">👤</div>
+          <div class="wf-icon-box" style="position:relative;">🛒<span style="position:absolute;top:-2px;right:-2px;background:#F5A623;color:#333;width:12px;height:12px;border-radius:50%;font-size:7px;display:flex;align-items:center;justify-content:center;font-weight:bold;">2</span></div>
+        </div>
+      </div>
+      <div class="wf-body">
+        <!-- promo -->
+        <div class="wf-promo">
+          <div class="wf-promo-badge">🔥 HOJE</div>
+          <div class="wf-promo-title">Combo do Dia com –20%!</div>
+        </div>
+        <!-- busca -->
+        <div class="wf-search">🔍  Buscar item no cardápio...</div>
+        <!-- chips categorias -->
+        <div class="wf-chips">
+          <div class="wf-chip active">Todos</div>
+          <div class="wf-chip">Tapiocas</div>
+          <div class="wf-chip">Cuscuz</div>
+          <div class="wf-chip">Bebidas</div>
+          <div class="wf-chip">Sobremesas</div>
+        </div>
+        <!-- produtos -->
+        <div class="wf-product">
+          <div class="wf-prod-img">🌮</div>
+          <div class="wf-prod-info">
+            <div class="wf-prod-name">Tapioca de Carne Seca</div>
+            <div class="wf-prod-desc">Carne seca desfiada com queijo coalho</div>
+            <div class="wf-prod-footer">
+              <div class="wf-prod-price">R$ 18,90</div>
+              <div class="wf-qty">
+                <div class="wf-qty-btn minus">−</div>
+                <div class="wf-qty-num">1</div>
+                <div class="wf-qty-btn">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-product">
+          <div class="wf-prod-img">🌮</div>
+          <div class="wf-prod-info">
+            <div class="wf-prod-name">Tapioca de Frango</div>
+            <div class="wf-prod-desc">Frango desfiado com catupiry cremoso</div>
+            <div class="wf-prod-footer">
+              <div class="wf-prod-price">R$ 16,90</div>
+              <div class="wf-add-btn">+ Adicionar</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-product" style="opacity:.5;">
+          <div class="wf-prod-img">🌮</div>
+          <div class="wf-prod-info">
+            <div class="wf-prod-name">Tapioca de Calabresa</div>
+            <div class="wf-prod-desc">Calabresa acebolada artesanal</div>
+            <div class="wf-prod-footer">
+              <div class="wf-prod-price">R$ 17,90</div>
+              <div style="font-size:8px;color:#c00;font-weight:bold;">Indisponível</div>
+            </div>
+          </div>
+        </div>
+        <!-- FAB -->
+        <div class="wf-fab">🛒 Ver Carrinho (1 item) · R$ 18,90</div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item active"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF04: CARRINHO -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF04 · Tela de Carrinho<br>Revisão e Pontos de Fidelidade</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Meu Carrinho</div></div>
+        </div>
+        <div class="wf-header-icons"><div class="wf-icon-box">🛒</div></div>
+      </div>
+      <div class="wf-body">
+        <div style="font-size:11px;font-weight:bold;margin-bottom:4px;">🛒 Seu Pedido</div>
+        <div style="font-size:9px;color:#999;margin-bottom:8px;">📍 Raízes do Nordeste – Centro</div>
+        <!-- itens -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div class="wf-cart-item">
+            <div class="wf-cart-emoji">🌮</div>
+            <div class="wf-cart-info">
+              <div class="wf-cart-name">Tapioca de Carne Seca</div>
+              <div class="wf-cart-unit">R$ 18,90 × 1</div>
+            </div>
+            <div class="wf-qty" style="margin:0 6px;">
+              <div class="wf-qty-btn minus" style="width:18px;height:18px;font-size:9px;">−</div>
+              <div class="wf-qty-num" style="font-size:9px;">1</div>
+              <div class="wf-qty-btn" style="width:18px;height:18px;font-size:9px;">+</div>
+            </div>
+            <div class="wf-cart-total">R$ 18,90</div>
+          </div>
+          <div class="wf-cart-item" style="border-bottom:none;">
+            <div class="wf-cart-emoji">🥤</div>
+            <div class="wf-cart-info">
+              <div class="wf-cart-name">Suco de Caju</div>
+              <div class="wf-cart-unit">R$ 8,90 × 1</div>
+            </div>
+            <div class="wf-qty" style="margin:0 6px;">
+              <div class="wf-qty-btn minus" style="width:18px;height:18px;font-size:9px;">−</div>
+              <div class="wf-qty-num" style="font-size:9px;">1</div>
+              <div class="wf-qty-btn" style="width:18px;height:18px;font-size:9px;">+</div>
+            </div>
+            <div class="wf-cart-total">R$ 8,90</div>
+          </div>
+        </div>
+        <!-- pontos -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div style="font-size:9px;font-weight:bold;margin-bottom:4px;">⭐ Usar Pontos de Fidelidade</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="font-size:8px;color:#777;">Você tem <strong>120 pontos</strong></div>
+            <div class="wf-check" style="margin:0;">
+              <div class="wf-check-box"></div>
+              <div class="wf-check-label">Usar</div>
+            </div>
+          </div>
+        </div>
+        <!-- totais -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div class="wf-total-row"><span>Subtotal</span><span>R$ 27,80</span></div>
+          <div class="wf-total-row final"><span>Total</span><span>R$ 27,80</span></div>
+          <div style="font-size:8px;color:#777;margin-top:4px;">⭐ Este pedido renderá 27 pontos!</div>
+        </div>
+        <div class="wf-btn">Ir para Pagamento →</div>
+        <div class="wf-btn outline" style="margin-top:6px;">← Continuar Comprando</div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF05: CHECKOUT -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF05 · Tela de Checkout<br>Pagamento + Confirmação LGPD</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Finalizar Pedido</div></div>
+        </div>
+        <div class="wf-header-icons"><div class="wf-icon-box">🛒</div></div>
+      </div>
+      <div class="wf-body">
+        <!-- resumo -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div style="font-size:9px;font-weight:bold;margin-bottom:4px;">📋 Resumo do Pedido</div>
+          <div class="wf-total-row"><span>🌮 Tapioca Carne Seca × 1</span><span>R$ 18,90</span></div>
+          <div class="wf-total-row"><span>🥤 Suco de Caju × 1</span><span>R$ 8,90</span></div>
+          <div class="wf-total-row final"><span>Total</span><span>R$ 27,80</span></div>
+        </div>
+        <!-- LGPD pagamento -->
+        <div class="wf-lgpd">
+          <div class="wf-lgpd-icon">🔒</div>
+          <div>
+            <span class="wf-lgpd-title">Segurança no Pagamento (LGPD)</span>
+            Dados transmitidos via HTTPS ao gateway externo. Não armazenamos dados de cartão.
+          </div>
+        </div>
+        <!-- formas de pag -->
+        <div style="font-size:9px;font-weight:bold;margin-bottom:6px;">💳 Forma de Pagamento</div>
+        <div class="wf-pay-opt sel">
+          <div class="wf-radio sel"></div>
+          <div class="wf-pay-icon">⚡</div>
+          <div><div class="wf-pay-name">Pix</div><div class="wf-pay-desc">Aprovação imediata · sem taxas</div></div>
+        </div>
+        <div class="wf-pay-opt">
+          <div class="wf-radio"></div>
+          <div class="wf-pay-icon">💳</div>
+          <div><div class="wf-pay-name">Cartão de Crédito</div><div class="wf-pay-desc">Até 3× sem juros</div></div>
+        </div>
+        <div class="wf-pay-opt">
+          <div class="wf-radio"></div>
+          <div class="wf-pay-icon">💵</div>
+          <div><div class="wf-pay-name">Dinheiro</div><div class="wf-pay-desc">Pague no balcão</div></div>
+        </div>
+        <!-- confirm LGPD -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin:8px 0;background:#fff;">
+          <div class="wf-check">
+            <div class="wf-check-box checked"></div>
+            <div class="wf-check-label">Confirmo os <a>Termos de Uso</a> e autorizo o envio ao gateway de pagamento (LGPD).</div>
+          </div>
+        </div>
+        <div class="wf-btn">🔒 Confirmar e Pagar</div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item active"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF06: PAGAMENTO (simulação gateway) -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF06 · Simulação de Pagamento<br>Gateway Externo (Pix)</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Pagamento</div></div>
+        </div>
+      </div>
+      <div class="wf-body" style="text-align:center;padding-top:20px;">
+        <div class="wf-spinner"></div>
+        <div style="font-size:11px;font-weight:bold;margin-bottom:6px;">Processando pagamento...</div>
+        <div style="font-size:9px;color:#999;margin-bottom:12px;">Aguarde. Enviando ao gateway externo.</div>
+        <div class="wf-lgpd" style="text-align:left;">
+          <div class="wf-lgpd-icon">🔒</div>
+          <div><span class="wf-lgpd-title">Conexão segura</span>Dados transmitidos via HTTPS/TLS.</div>
+        </div>
+        <!-- QR Code mock -->
+        <div style="border:1.5px solid #ddd;border-radius:8px;padding:12px;margin-top:8px;background:#fff;">
+          <div style="font-size:9px;font-weight:bold;margin-bottom:8px;">Escaneie o QR Code Pix</div>
+          <div style="display:grid;grid-template-columns:repeat(7,16px);gap:2px;margin:0 auto 8px;width:fit-content;">
+            <!-- QR simulado -->
+            <div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div>
+            <div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div>
+            <div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div>
+            <div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div>
+            <div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#fff;width:16px;height:16px;border-radius:2px;border:1px solid #eee;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div><div style="background:#333;width:16px;height:16px;border-radius:2px;"></div>
+          </div>
+          <div style="font-size:8px;color:#999;">Chave: raizesnordeste@pagamento.com.br</div>
+          <div style="font-size:9px;color:#555;margin-top:3px;">Valor: <strong>R$ 27,80</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF07: ACOMPANHAMENTO -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF07 · Acompanhamento do Pedido<br>Status em Tempo Real</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Meu Pedido</div></div>
+        </div>
+        <div class="wf-header-icons"><div class="wf-icon-box">🛒</div></div>
+      </div>
+      <div class="wf-body">
+        <!-- número pedido -->
+        <div class="wf-order-num">
+          <div class="wf-order-num-label">Senha do Pedido</div>
+          <div class="wf-order-num-val">42</div>
+        </div>
+        <!-- info unidade -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <div>
+              <div style="font-size:9px;font-weight:bold;">Raízes do Nordeste – Centro</div>
+              <div style="font-size:8px;color:#999;">Pedido realizado às 12:34</div>
+            </div>
+            <div style="background:#555;color:#fff;font-size:8px;padding:3px 8px;border-radius:20px;font-weight:bold;">Em Preparo</div>
+          </div>
+          <div style="font-size:8px;color:#999;">🌮 Tapioca de Carne Seca × 1 &nbsp;|&nbsp; 🥤 Suco de Caju × 1</div>
+        </div>
+        <!-- timeline -->
+        <div style="font-size:9px;font-weight:bold;margin-bottom:6px;">📍 Status do Pedido</div>
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;">
+          <div class="wf-status-steps">
+            <div class="wf-step done">
+              <div class="wf-step-dot">✅</div>
+              <div class="wf-step-content">
+                <div class="wf-step-title">Pedido Confirmado</div>
+                <div class="wf-step-desc">Pagamento processado com sucesso!</div>
+              </div>
+            </div>
+            <div class="wf-step active">
+              <div class="wf-step-dot">👨‍🍳</div>
+              <div class="wf-step-content">
+                <div class="wf-step-title">Em Preparo</div>
+                <div class="wf-step-desc">Nossa cozinha está preparando seu pedido.</div>
+              </div>
+            </div>
+            <div class="wf-step" style="padding-bottom:0;">
+              <div class="wf-step-dot">🔔</div>
+              <div class="wf-step-content">
+                <div class="wf-step-title">Pronto para Retirada!</div>
+                <div class="wf-step-desc">Dirija-se ao balcão com sua senha.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- pontos -->
+        <div style="border:1px solid #ddd;border-radius:8px;padding:8px;margin-bottom:8px;background:#fff;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:9px;font-weight:bold;">⭐ Pontos Conquistados</div>
+            <div style="font-size:8px;color:#999;">Creditados após confirmação</div>
+          </div>
+          <div style="font-size:16px;font-weight:900;color:#555;">+27</div>
+        </div>
+        <div class="wf-btn">🍽️ Fazer Novo Pedido</div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item active"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WF08: FIDELIDADE -->
+  <div class="phone-wrap">
+    <div class="phone-label">WF08 · Programa de Fidelidade<br>Pontos, Recompensas e Promoções</div>
+    <div class="phone">
+      <div class="wf-status"></div>
+      <div class="wf-header">
+        <div class="wf-header-logo">
+          <div class="wf-circle"></div>
+          <div><div style="font-size:10px;">Raízes do Nordeste</div><div style="font-size:8px;opacity:.7;">Programa de Fidelidade</div></div>
+        </div>
+        <div class="wf-header-icons"><div class="wf-icon-box">🛒</div></div>
+      </div>
+      <div class="wf-body">
+        <!-- LGPD aviso -->
+        <div class="wf-lgpd">
+          <div class="wf-lgpd-icon">🔒</div>
+          <div><span class="wf-lgpd-title">Fidelidade e LGPD</span>Participação opcional. Dados usados só para calcular recompensas.</div>
+        </div>
+        <!-- pontos -->
+        <div class="wf-points">
+          <div class="wf-points-num">120</div>
+          <div class="wf-points-label">⭐ Seus Pontos</div>
+          <div style="font-size:8px;opacity:.7;margin-top:4px;">Próximo resgate em 30 pts</div>
+        </div>
+        <!-- promoção -->
+        <div style="font-size:9px;font-weight:bold;margin-bottom:6px;">🎉 Promoções Ativas</div>
+        <div class="wf-promo" style="margin-bottom:6px;">
+          <div class="wf-promo-badge">–20%</div>
+          <div class="wf-promo-title">Combo do Dia</div>
+          <div style="font-size:8px;opacity:.9;">Qualquer Combo com 20% de desconto hoje!</div>
+        </div>
+        <!-- recompensas -->
+        <div style="font-size:9px;font-weight:bold;margin-bottom:6px;margin-top:8px;">🎁 Recompensas</div>
+        <div class="wf-reward">
+          <div class="wf-reward-icon">🥤</div>
+          <div class="wf-reward-info">
+            <div class="wf-reward-name">Bebida Grátis</div>
+            <div class="wf-reward-pts">⭐ 80 pontos</div>
+          </div>
+          <div class="wf-btn sm">Resgatar</div>
+        </div>
+        <div class="wf-reward">
+          <div class="wf-reward-icon">🌮</div>
+          <div class="wf-reward-info">
+            <div class="wf-reward-name">Tapioca Grátis</div>
+            <div class="wf-reward-pts">⭐ 150 pontos</div>
+          </div>
+          <div class="wf-btn sm outline" style="font-size:8px;">Faltam 30 pts</div>
+        </div>
+      </div>
+      <div class="wf-bottom-nav">
+        <div class="wf-nav-item"><span class="ni">🏠</span>Início</div>
+        <div class="wf-nav-item"><span class="ni">🍽️</span>Cardápio</div>
+        <div class="wf-nav-item active"><span class="ni">⭐</span>Fidelidade</div>
+        <div class="wf-nav-item"><span class="ni">📦</span>Pedido</div>
+        <div class="wf-nav-item"><span class="ni">👤</span>Conta</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /grade mobile -->
+
+<hr class="separator">
+
+<!-- ============================================================
+     GRUPO 2 — LAYOUT DESKTOP (CARDÁPIO)
+============================================================ -->
+<div class="grupo-titulo">Wireframe — Layout Desktop / Web (1280px)</div>
+
+<div style="max-width:860px;margin:0 auto 20px;">
+  <div class="phone-label" style="margin-bottom:10px;">WF09 · Tela de Cardápio — Layout Desktop responsivo</div>
+  <div class="desktop">
+    <!-- header desktop -->
+    <div class="wf-header">
+      <div class="wf-header-logo">
+        <div class="wf-circle"></div>
+        <div><div style="font-size:11px;">Raízes do Nordeste</div><div style="font-size:9px;opacity:.7;">Centro – Osasco</div></div>
+      </div>
+      <div style="display:flex;gap:8px;font-size:9px;">
+        <div class="wf-icon-box">👤</div>
+        <div class="wf-icon-box" style="position:relative;">🛒<span style="position:absolute;top:-2px;right:-2px;background:#F5A623;color:#333;width:12px;height:12px;border-radius:50%;font-size:7px;display:flex;align-items:center;justify-content:center;font-weight:bold;">2</span></div>
+      </div>
+    </div>
+    <!-- nav desktop -->
+    <div class="wf-desktop-nav">
+      <span>Início</span>
+      <span class="active">Cardápio</span>
+      <span>Fidelidade</span>
+      <span>Meu Pedido</span>
+      <span>Entrar</span>
+    </div>
+    <!-- promo banner -->
+    <div class="wf-promo" style="margin:12px;border-radius:8px;">
+      <div class="wf-promo-badge">🔥 HOJE</div>
+      <div class="wf-promo-title">Combo do Dia com –20%! Qualquer Combo do cardápio com desconto especial.</div>
+    </div>
+    <!-- chips -->
+    <div style="padding:0 12px;">
+      <div class="wf-search">🔍  Buscar item no cardápio...</div>
+      <div class="wf-chips">
+        <div class="wf-chip active">Todos</div>
+        <div class="wf-chip">Tapiocas</div>
+        <div class="wf-chip">Cuscuz</div>
+        <div class="wf-chip">Bebidas</div>
+        <div class="wf-chip">Sobremesas</div>
+        <div class="wf-chip">Combos</div>
+      </div>
+    </div>
+    <!-- grid desktop 2 colunas -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 12px 12px;">
+      <div class="wf-product">
+        <div class="wf-prod-img">🌮</div>
+        <div class="wf-prod-info">
+          <div class="wf-prod-name">Tapioca de Carne Seca</div>
+          <div class="wf-prod-desc">Carne seca com queijo coalho</div>
+          <div class="wf-prod-footer">
+            <div class="wf-prod-price">R$ 18,90</div>
+            <div class="wf-qty">
+              <div class="wf-qty-btn minus">−</div>
+              <div class="wf-qty-num">1</div>
+              <div class="wf-qty-btn">+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-product">
+        <div class="wf-prod-img">🌮</div>
+        <div class="wf-prod-info">
+          <div class="wf-prod-name">Tapioca de Frango</div>
+          <div class="wf-prod-desc">Frango com catupiry cremoso</div>
+          <div class="wf-prod-footer">
+            <div class="wf-prod-price">R$ 16,90</div>
+            <div class="wf-add-btn">+ Adicionar</div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-product">
+        <div class="wf-prod-img">🥣</div>
+        <div class="wf-prod-info">
+          <div class="wf-prod-name">Cuscuz com Ovo Caipira</div>
+          <div class="wf-prod-desc">Cuscuz flocado com ovo frito</div>
+          <div class="wf-prod-footer">
+            <div class="wf-prod-price">R$ 10,90</div>
+            <div class="wf-add-btn">+ Adicionar</div>
+          </div>
+        </div>
+      </div>
+      <div class="wf-product">
+        <div class="wf-prod-img">🍱</div>
+        <div class="wf-prod-info">
+          <div class="wf-prod-name" style="display:flex;gap:4px;align-items:center;">Combo Nordestino <span style="background:#eee;font-size:7px;padding:1px 5px;border-radius:3px;color:#777;">⭐ Destaque</span></div>
+          <div class="wf-prod-desc">Cuscuz + Tapioca + Suco à escolha</div>
+          <div class="wf-prod-footer">
+            <div class="wf-prod-price">R$ 29,90</div>
+            <div class="wf-add-btn">+ Adicionar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FAB desktop -->
+    <div style="margin:0 12px 12px;">
+      <div class="wf-fab">🛒 Ver Carrinho (1 item) · R$ 18,90</div>
+    </div>
+  </div>
+</div>
+
+<hr class="separator">
+
+<!-- ============================================================
+     GRUPO 3 — MODO TOTEM
+============================================================ -->
+<div class="grupo-titulo">Wireframe — Modo Totem (?modo=totem)</div>
+
+<div style="max-width:480px;margin:0 auto 40px;">
+  <div class="phone-label" style="margin-bottom:10px;">WF10 · Totem de Autoatendimento — Elementos ampliados para toque em tela grande</div>
+  <div class="desktop">
+    <!-- barra totem -->
+    <div style="background:#333;color:#fff;text-align:center;padding:6px;font-size:10px;font-weight:bold;letter-spacing:.1em;">🖥️ TOTEM DE AUTOATENDIMENTO</div>
+    <div class="wf-header">
+      <div class="wf-header-logo">
+        <div class="wf-circle"></div>
+        <div><div style="font-size:12px;">Raízes do Nordeste</div><div style="font-size:9px;opacity:.7;">Centro – Osasco</div></div>
+      </div>
+      <div class="wf-header-icons"><div class="wf-icon-box" style="width:36px;height:36px;font-size:14px;">🛒</div></div>
+    </div>
+    <div style="padding:12px;">
+      <!-- chips totem (maiores) -->
+      <div class="wf-chips" style="margin-bottom:12px;">
+        <div class="wf-chip active" style="padding:8px 16px;font-size:11px;">Todos</div>
+        <div class="wf-chip" style="padding:8px 16px;font-size:11px;">Tapiocas</div>
+        <div class="wf-chip" style="padding:8px 16px;font-size:11px;">Cuscuz</div>
+        <div class="wf-chip" style="padding:8px 16px;font-size:11px;">Bebidas</div>
+      </div>
+      <!-- produto totem (botões grandes) -->
+      <div class="wf-product" style="padding:12px;">
+        <div class="wf-prod-img" style="width:80px;height:80px;min-width:80px;font-size:30px;">🌮</div>
+        <div class="wf-prod-info">
+          <div class="wf-prod-name" style="font-size:13px;">Tapioca de Carne Seca</div>
+          <div class="wf-prod-desc" style="font-size:10px;">Carne seca desfiada com queijo coalho</div>
+          <div class="wf-prod-footer" style="margin-top:8px;">
+            <div class="wf-prod-price" style="font-size:14px;">R$ 18,90</div>
+            <div class="wf-qty">
+              <div class="wf-qty-btn minus" style="width:30px;height:30px;font-size:14px;">−</div>
+              <div class="wf-qty-num" style="font-size:14px;">1</div>
+              <div class="wf-qty-btn" style="width:30px;height:30px;font-size:14px;">+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- botão totem (grande) -->
+      <div class="wf-btn" style="padding:16px;font-size:14px;margin-top:12px;">🛒 Ver Carrinho (1 item) · R$ 18,90</div>
+      <div style="text-align:center;margin-top:8px;font-size:9px;color:#aaa;">Toque na tela para selecionar os itens</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
